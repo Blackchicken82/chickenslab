@@ -1,252 +1,456 @@
-<!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Editorial by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicken's Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f1a;
+      --panel: #12121f;
+      --border: #1e1e3a;
+      --accent: #00e5ff;
+      --accent2: #ff6b35;
+      --accent3: #39ff14;
+      --text: #c8d0e0;
+      --muted: #4a5568;
+      --glow: 0 0 20px rgba(0, 229, 255, 0.3);
+    }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+    /* SCANLINE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
 
-							<!-- Banner -->
-								<section id="banner">
-									<div class="content">
-										<header>
-											<h1>Hi, I’m Editorial<br />
-											by HTML5 UP</h1>
-											<p>A free and fully responsive site template</p>
-										</header>
-										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										</ul>
-									</div>
-									<span class="image object">
-										<img src="images/pic10.jpg" alt="" />
-									</span>
-								</section>
+    /* HEADER */
+    header {
+      position: relative;
+      height: 380px;
+      overflow: hidden;
+      border-bottom: 2px solid var(--accent);
+      box-shadow: 0 4px 40px rgba(0, 229, 255, 0.2);
+    }
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Erat lacinia</h2>
-									</header>
-									<div class="features">
-										<article>
-											<span class="icon fa-gem"></span>
-											<div class="content">
-												<h3>Portitor ullamcorper</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-paper-plane"></span>
-											<div class="content">
-												<h3>Sapien veroeros</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-rocket"></span>
-											<div class="content">
-												<h3>Quam lorem ipsum</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon solid fa-signal"></span>
-											<div class="content">
-												<h3>Sed magna finibus</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-									</div>
-								</section>
+    .header-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(255, 107, 53, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0a1e 0%, #050510 50%, #0a0f0a 100%);
+    }
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Ipsum sed dolor</h2>
-									</header>
-									<div class="posts">
-										<article>
-											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-											<h3>Interdum aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-											<h3>Nulla amet dolore</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-											<h3>Tempus ullamcorper</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3>Sed etiam facilis</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3>Feugiat lorem aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3>Amet varius aliquam</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-									</div>
-								</section>
+    /* Circuit board pattern */
+    .header-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.4;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    }
 
-						</div>
-					</div>
+    .header-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      mix-blend-mode: screen;
+    }
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+    .header-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
 
-							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+    .header-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 4px;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+      animation: pulse 2s ease-in-out infinite;
+    }
 
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="index.html">Homepage</a></li>
-										<li><a href="generic.html">Generic</a></li>
-										<li><a href="elements.html">Elements</a></li>
-										<li>
-											<span class="opener">Submenu</span>
-											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Etiam Dolore</a></li>
-										<li><a href="#">Adipiscing</a></li>
-										<li>
-											<span class="opener">Another Submenu</span>
-											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Maximus Erat</a></li>
-										<li><a href="#">Sapien Mauris</a></li>
-										<li><a href="#">Amet Lacinia</a></li>
-									</ul>
-								</nav>
+    .header-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-shadow:
+        0 0 10px rgba(0, 229, 255, 0.8),
+        0 0 40px rgba(0, 229, 255, 0.4),
+        0 0 80px rgba(0, 229, 255, 0.1);
+      line-height: 1.1;
+    }
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Ante interdum</h2>
-									</header>
-									<div class="mini-posts">
-										<article>
-											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-									</div>
-									<ul class="actions">
-										<li><a href="#" class="button">More</a></li>
-									</ul>
-								</section>
+    .header-title span {
+      color: var(--accent);
+    }
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Get in touch</h2>
-									</header>
-									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-										<li class="icon solid fa-phone">(000) 000-0000</li>
-										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-										Nashville, TN 00000-0000</li>
-									</ul>
-								</section>
+    .header-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 3px;
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
 
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-								</footer>
+    .header-line {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 1.2rem auto 0;
+      animation: expand 1s ease-out forwards;
+    }
 
-						</div>
-					</div>
+    /* LAYOUT */
+    .layout {
+      display: flex;
+      flex: 1;
+    }
 
-			</div>
+    /* SIDEBAR */
+    nav {
+      width: 240px;
+      min-width: 240px;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      padding: 2rem 0;
+      position: relative;
+    }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+    nav::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, var(--accent), transparent);
+      opacity: 0.4;
+    }
 
-	</body>
+    .nav-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 0 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.5rem;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    nav a .icon {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(0, 229, 255, 0.05);
+      text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    }
+
+    nav a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(0, 229, 255, 0.08);
+    }
+
+    .nav-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 1.5rem;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      padding: 2.5rem 3rem;
+      background: var(--bg2);
+    }
+
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      color: var(--text);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--card-accent, var(--accent));
+      transition: width 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--card-accent, var(--accent));
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .card:hover::before { width: 5px; }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--card-accent, var(--accent));
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .card:nth-child(1) { --card-accent: #00e5ff; }
+    .card:nth-child(2) { --card-accent: #ff6b35; }
+    .card:nth-child(3) { --card-accent: #39ff14; }
+    .card:nth-child(4) { --card-accent: #b44fff; }
+
+    /* TERMINAL BLOCK */
+    .terminal {
+      background: #080810;
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent3);
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .terminal::before {
+      content: '> SYSTEM LOG';
+      display: block;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+
+    .terminal .line { opacity: 0; animation: appear 0.3s forwards; }
+    .terminal .line:nth-child(1) { animation-delay: 0.2s; color: var(--accent); }
+    .terminal .line:nth-child(2) { animation-delay: 0.5s; }
+    .terminal .line:nth-child(3) { animation-delay: 0.8s; }
+    .terminal .line:nth-child(4) { animation-delay: 1.1s; color: var(--accent2); }
+    .terminal .line:nth-child(5) { animation-delay: 1.4s; }
+    .terminal .cursor { display: inline-block; animation: blink 1s step-end infinite; }
+
+    /* FOOTER */
+    footer {
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      padding: 1rem 3rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes pulse { 0%,100% { opacity: 0.8; } 50% { opacity: 0.4; } }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes appear { to { opacity: 1; } }
+    @keyframes expand { from { width: 0; } to { width: 120px; } }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .layout { flex-direction: column; }
+      nav { width: 100%; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem 0; display: flex; flex-wrap: wrap; gap: 0; }
+      nav a { padding: 0.6rem 1rem; font-size: 0.9rem; border-left: none; border-bottom: 2px solid transparent; }
+      nav a:hover, nav a.active { border-left-color: transparent; border-bottom-color: var(--accent); }
+      .nav-label, .nav-divider { display: none; }
+      main { padding: 1.5rem; }
+      header { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-bg"></div>
+    <!-- Replace src with your own header image -->
+    <img class="header-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=80" alt="Lab header" />
+    <div class="header-content">
+      <div class="header-badge">// ESP32 · HOUDINI · PYTHON · DIY //</div>
+      <h1 class="header-title">Welcome in <span>Chicken's</span> Lab</h1>
+      <p class="header-sub">Experiments &amp; Projects</p>
+      <div class="header-line"></div>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <nav>
+      <div class="nav-label">// Navigation</div>
+      <a href="index.html" class="active"><span class="icon">⬡</span> Home</a>
+      <div class="nav-divider"></div>
+      <a href="houdini.html"><span class="icon">◈</span> Houdini</a>
+      <a href="python.html"><span class="icon">◉</span> Python</a>
+      <a href="micropython.html"><span class="icon">◎</span> MicroPython</a>
+      <a href="diy.html"><span class="icon">⚙</span> DIY</a>
+    </nav>
+
+    <main>
+      <div class="section-title">// Featured Areas</div>
+
+      <div class="cards">
+        <a class="card" href="houdini.html">
+          <div class="card-icon">◈</div>
+          <div class="card-title">Houdini</div>
+          <div class="card-desc">VEX scripting, Python SOPs, procedural geometry and FX workflows.</div>
+        </a>
+        <a class="card" href="python.html">
+          <div class="card-icon">◉</div>
+          <div class="card-title">Python</div>
+          <div class="card-desc">Scripts, automation tools, data processing and general-purpose hacks.</div>
+        </a>
+        <a class="card" href="micropython.html">
+          <div class="card-icon">◎</div>
+          <div class="card-title">MicroPython</div>
+          <div class="card-desc">ESP32 firmware, LVGL displays, sensors and embedded experiments.</div>
+        </a>
+        <a class="card" href="diy.html">
+          <div class="card-icon">⚙</div>
+          <div class="card-title">DIY</div>
+          <div class="card-desc">Hardware builds, 3D printing, electronics and lab projects.</div>
+        </a>
+      </div>
+
+      <div class="section-title">// System Status</div>
+
+      <div class="terminal">
+        <div class="line">[ OK ] Chicken's Lab v1.0 — online</div>
+        <div class="line">[ OK ] Houdini 20.x environment loaded</div>
+        <div class="line">[ OK ] ESP32-S3 WROOM firmware flashed</div>
+        <div class="line">[ WARN ] Coffee level: critical</div>
+        <div class="line">[ READY ] Awaiting next experiment... <span class="cursor">█</span></div>
+      </div>
+    </main>
+
+  </div>
+
+  <footer>
+    <span>CHICKEN'S LAB</span>
+    <span>// All experiments may cause unexpected side effects //</span>
+    <span id="ts"></span>
+  </footer>
+
+  <script>
+    document.getElementById('ts').textContent = new Date().toLocaleDateString('en-GB', {year:'numeric',month:'short',day:'2-digit'});
+  </script>
+</body>
 </html>
