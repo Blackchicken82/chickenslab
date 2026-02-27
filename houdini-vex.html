@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Houdini VEX — Chicken's Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <img
+            src="pict/web_pict_01.png"
+            alt="Lab header"
+            onerror="this.style.display='none'"
+        >
+        <div class="header-text">
+            <h1>Welcome in <span>Chicken's</span> Lab</h1>
+            <p>// experiments &amp; projects //</p>
+        </div>
+    </header>
+
+    <div class="page">
+
+        <nav>
+            <a href="index.html">Home</a>
+
+            <div class="divider"></div>
+
+            <a href="houdini.html">Houdini</a>
+            <a href="houdini-vex.html" class="sub active">VEX</a>
+            <a href="houdini-python.html" class="sub">Python</a>
+
+            <div class="divider"></div>
+
+            <a href="python.html">Python</a>
+            <a href="micropython.html">MicroPython</a>
+            <a href="diy.html">DIY</a>
+        </nav>
+
+        <main>
+
+            <!-- ------------------------------------------------
+                 INTRO  —  edit this text
+            ------------------------------------------------ -->
+            <h2>// Houdini VEX</h2>
+
+            <p>
+                VEX is Houdini's built-in shading and geometry language.
+                It runs inside Wrangle nodes and lets you manipulate
+                attributes, geometry and simulations at a low level.
+            </p>
+
+
+            <!-- ------------------------------------------------
+                 CODE SNIPPET
+                 Replace the code inside the pre tags with your own.
+                 Use these classes for colour:
+                   c-comment   — grey comments
+                   c-keyword   — orange keywords
+                   c-string    — yellow strings
+                   c-number    — teal numbers
+                   c-function  — white function names
+            ------------------------------------------------ -->
+            <h2>// Example — Move points by noise</h2>
+
+            <div class="code-block">
+<pre>
+<span class="c-comment">// Wrangle SOP — point mode</span>
+<span class="c-comment">// Moves each point along its normal by a noise value</span>
+
+<span class="c-keyword">vector</span> npos  = @P * <span class="c-number">2.5</span>;
+<span class="c-keyword">float</span>  amount = <span class="c-function">fit01</span>( <span class="c-function">noise</span>(npos), <span class="c-number">-0.3</span>, <span class="c-number">0.3</span> );
+
+@P += @N * amount;
+</pre>
+            </div>
+
+
+            <!-- ------------------------------------------------
+                 IMAGE / GIF  —  replace placeholder with your file
+            ------------------------------------------------ -->
+            <div class="media-block">
+                <div class="caption">// result in viewport</div>
+                <!-- <img src="pict/vex_noise.gif" alt="VEX noise result"> -->
+                <div class="placeholder">[ add image or gif here — pict/your-file.gif ]</div>
+            </div>
+
+
+            <!-- ------------------------------------------------
+                 MORE TEXT  —  add as many sections as you need
+            ------------------------------------------------ -->
+            <h2>// Notes</h2>
+
+            <p>
+                Add your own notes here. What did you learn?
+                What was tricky? What would you do differently?
+            </p>
+
+
+            <!-- ------------------------------------------------
+                 SECOND CODE SNIPPET  —  copy this block to add more
+            ------------------------------------------------ -->
+            <h2>// Example — Remove points by curvature</h2>
+
+            <div class="code-block">
+<pre>
+<span class="c-comment">// Keep only high-curvature points</span>
+
+<span class="c-keyword">float</span> curv = <span class="c-function">abs</span>(@curvature);
+
+<span class="c-keyword">if</span> (curv &lt; <span class="c-number">0.05</span>) {
+    <span class="c-function">removepoint</span>(<span class="c-number">0</span>, @ptnum);
+}
+</pre>
+            </div>
+
+            <div class="media-block">
+                <div class="caption">// before and after</div>
+                <!-- <img src="pict/vex_curvature.png" alt="Curvature result"> -->
+                <div class="placeholder">[ add image or gif here — pict/your-file.png ]</div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <footer>
+        <span>Chicken's Lab</span>
+        <span>// all experiments may cause unexpected side effects //</span>
+    </footer>
+
+</body>
+</html>

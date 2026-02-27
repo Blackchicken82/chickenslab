@@ -1,0 +1,381 @@
+/* ================================================================
+   CHICKEN'S LAB — style.css
+   Palette L1  |  Saffron orange on ocean dark teal-black
+   ----------------------------------------------------------------
+   COLOURS:
+   #060e12  — near black          (body background)
+   #0e2228  — dark teal           (header, sidebar top)
+   #172B36  — mid teal            (panels, cards)
+   #1E536E  — medium teal         (borders, muted text)
+   #18A3B7  — bright teal         (hover links)
+   #FF9932  — saffron orange      (accent, active, headings)
+   #FFC801  — bright yellow       (accent highlight)
+   #e0e8ec  — off-white           (main text)
+================================================================ */
+
+
+/* ── RESET ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ── BODY ── */
+body {
+    background: #060e12;
+    color: #e0e8ec;
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ================================================================
+   HEADER
+================================================================ */
+header {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    border-bottom: 3px solid #FF9932;
+}
+
+/* Your photo — put it in pict/web_pict_01.png */
+header img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.30);
+}
+
+/* Thin dark fade at the bottom so text is readable */
+header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent           0%,
+        transparent          55%,
+        rgba(6, 14, 18, 0.75) 100%
+    );
+}
+
+/* Soft orange glow on the left — only visible when photo is loaded */
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at 15% 60%,
+        rgba(255, 153, 50, 0.18) 0%,
+        transparent 55%
+    );
+    z-index: 1;
+}
+
+/* Title text block — centered at the bottom */
+.header-text {
+    position: absolute;
+    bottom: 110px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 2;
+}
+
+.header-text h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.95), 0 0 20px rgba(0,0,0,0.7);
+    line-height: 1;
+}
+
+.header-text h1 span {
+    color: #FF9932;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.95), 0 0 20px rgba(255,153,50,0.5);
+}
+
+.header-text p {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: #FF9932;
+    letter-spacing: 4px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+    opacity: 0.7;
+}
+
+
+/* ================================================================
+   PAGE LAYOUT — sidebar + main side by side
+================================================================ */
+.page {
+    display: flex;
+    flex: 1;
+}
+
+
+/* ================================================================
+   SIDEBAR NAVIGATION
+================================================================ */
+nav {
+    width: 210px;
+    min-width: 210px;
+    background: linear-gradient(
+        to bottom,
+        #0e2228 0%,
+        #0a1a20 60%,
+        #060e12 100%
+    );
+    border-right: 2px solid #1E536E;
+    padding: 28px 0;
+}
+
+/* Section label above submenu */
+nav .nav-section {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: #1E536E;
+    text-transform: uppercase;
+    padding: 14px 20px 4px;
+}
+
+/* All nav links */
+nav a {
+    display: block;
+    padding: 10px 20px;
+    color: #1E536E;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+}
+
+nav a:hover {
+    color: #18A3B7;
+    border-left-color: #18A3B7;
+    background: rgba(24, 163, 183, 0.06);
+}
+
+nav a.active {
+    color: #FF9932;
+    border-left-color: #FF9932;
+    background: rgba(255, 153, 50, 0.07);
+}
+
+/* Submenu links — indented */
+nav a.sub {
+    padding-left: 34px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #1E536E;
+}
+
+nav a.sub:hover {
+    color: #18A3B7;
+    border-left-color: #18A3B7;
+}
+
+nav a.sub.active {
+    color: #FF9932;
+    border-left-color: #FF9932;
+}
+
+/* Thin divider line */
+nav .divider {
+    height: 1px;
+    background: #0e2228;
+    margin: 10px 20px;
+}
+
+
+/* ================================================================
+   MAIN CONTENT AREA
+================================================================ */
+main {
+    flex: 1;
+    padding: 36px 44px;
+    background: linear-gradient(
+        to right,
+        #0c1c22 0%,
+        #091418 40%,
+        #060e12 100%
+    );
+}
+
+/* Page heading */
+main h2 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 5px;
+    color: #1E536E;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    margin-top: 36px;
+    font-weight: 400;
+}
+
+/* First h2 on the page needs no top margin */
+main h2:first-child {
+    margin-top: 0;
+}
+
+/* Body text */
+main p {
+    font-size: 1.05rem;
+    color: #7a9aaa;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+
+/* ================================================================
+   TOPIC CARDS  (index page)
+================================================================ */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.card {
+    display: block;
+    text-decoration: none;
+    padding: 20px 22px;
+    background: #080f14;
+    border: 1px solid #0e2228;
+    border-left: 4px solid #1E536E;
+    transition: all 0.15s ease;
+}
+
+.card:hover {
+    border-left-color: #FF9932;
+    background: #0b1820;
+}
+
+.card h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #FF9932;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+.card p {
+    font-size: 0.88rem;
+    color: #1E536E;
+    line-height: 1.5;
+    margin: 0;
+}
+
+
+/* ================================================================
+   CODE SNIPPET BLOCK
+================================================================ */
+.code-block {
+    background: #040a0d;
+    border: 1px solid #0e2228;
+    border-left: 4px solid #FF9932;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: #7ab8c8;
+}
+
+/* Syntax highlight helpers — add these classes manually in your HTML */
+.code-block .c-comment  { color: #1E536E; }       /* comments     */
+.code-block .c-keyword  { color: #FF9932; }        /* keywords     */
+.code-block .c-string   { color: #FFC801; }        /* strings      */
+.code-block .c-number   { color: #18A3B7; }        /* numbers      */
+.code-block .c-function { color: #e0e8ec; }        /* function names */
+
+
+/* ================================================================
+   IMAGE / GIF BLOCK
+================================================================ */
+.media-block {
+    margin-bottom: 28px;
+}
+
+/* Caption above the image */
+.media-block .caption {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: #1E536E;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* The image or gif itself */
+.media-block img {
+    display: block;
+    max-width: 100%;
+    border: 1px solid #0e2228;
+    border-left: 4px solid #1E536E;
+}
+
+/* Grey placeholder shown when no image is set */
+.media-block .placeholder {
+    width: 100%;
+    height: 200px;
+    background: #080f14;
+    border: 1px dashed #1E536E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: #1E536E;
+    letter-spacing: 2px;
+}
+
+
+/* ================================================================
+   FOOTER
+================================================================ */
+footer {
+    padding: 14px 44px;
+    background: linear-gradient(
+        to right,
+        #0e2228 0%,
+        #060e12 100%
+    );
+    border-top: 2px solid #0e2228;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: #1E536E;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer span {
+    color: #FF9932;
+}

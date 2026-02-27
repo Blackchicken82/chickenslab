@@ -1,152 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Houdini — Chicken's Lab</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0a0a0f; --bg2: #0f0f1a; --panel: #12121f; --border: #1e1e3a;
-      --accent: #00e5ff; --accent2: #ff6b35; --text: #c8d0e0; --muted: #4a5568;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-    body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 999; }
-
-    header { position: relative; height: 200px; overflow: hidden; border-bottom: 2px solid var(--accent); box-shadow: 0 4px 40px rgba(0,229,255,0.2); }
-    .header-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(0,229,255,0.07) 0%, transparent 60%), linear-gradient(135deg, #0a0a1e 0%, #050510 100%); }
-    .header-bg::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.4; }
-    .header-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 2rem 3rem; }
-    .breadcrumb { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 0.75rem; }
-    .breadcrumb a { color: var(--accent); text-decoration: none; }
-    h1 { font-family: 'Orbitron', monospace; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(0,229,255,0.6); }
-    h1 span { color: var(--accent); }
-    .header-sub { font-size: 0.95rem; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-top: 0.5rem; }
-
-    .layout { display: flex; flex: 1; }
-    nav { width: 240px; min-width: 240px; background: var(--panel); border-right: 1px solid var(--border); padding: 2rem 0; }
-    .nav-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 3px; padding: 0 1.5rem; margin-bottom: 1rem; }
-    nav a { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1.5rem; color: var(--text); text-decoration: none; font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border-left: 3px solid transparent; transition: all 0.2s ease; }
-    nav a:hover, nav a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(0,229,255,0.05); }
-    .nav-divider { height: 1px; background: var(--border); margin: 1rem 1.5rem; }
-
-    main { flex: 1; padding: 2.5rem 3rem; background: var(--bg2); }
-    .section-title { font-family: 'Orbitron', monospace; font-size: 0.7rem; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
-
-    .topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
-    .topic { background: var(--panel); border: 1px solid var(--border); border-top: 2px solid var(--accent); padding: 1.5rem; transition: all 0.2s ease; }
-    .topic:hover { box-shadow: 0 0 20px rgba(0,229,255,0.1); transform: translateY(-2px); }
-    .topic h3 { font-family: 'Orbitron', monospace; font-size: 0.8rem; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem; }
-    .topic p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
-    .topic ul { list-style: none; margin-top: 0.75rem; }
-    .topic ul li { font-size: 0.9rem; color: var(--muted); padding: 0.2rem 0; padding-left: 1.2rem; position: relative; }
-    .topic ul li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
-
-    .code-block { background: #080810; border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 1.25rem 1.5rem; font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; color: #c0d0c0; line-height: 1.8; margin-bottom: 2.5rem; overflow-x: auto; }
-    .code-block .comment { color: var(--muted); }
-    .code-block .keyword { color: var(--accent); }
-    .code-block .string { color: #ffcc66; }
-    .code-block .number { color: var(--accent2); }
-    .code-block-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 0.5rem; }
-
-    footer { background: var(--panel); border-top: 1px solid var(--border); padding: 1rem 3rem; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--muted); display: flex; justify-content: space-between; }
-    footer span { color: var(--accent); }
-
-    @media (max-width: 768px) {
-      .layout { flex-direction: column; }
-      nav { width: 100%; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; padding: 0.5rem 0; }
-      nav a { padding: 0.6rem 1rem; font-size: 0.9rem; border-left: none; border-bottom: 2px solid transparent; }
-      nav a:hover, nav a.active { border-left-color: transparent; border-bottom-color: var(--accent); }
-      .nav-label, .nav-divider { display: none; }
-      main { padding: 1.5rem; }
-      .header-content { padding: 1.5rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Houdini — Chicken's Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div class="header-bg"></div>
-    <div class="header-content">
-      <div class="breadcrumb"><a href="index.html">HOME</a> / HOUDINI</div>
-      <h1>◈ <span>Houdini</span></h1>
-      <p class="header-sub">VEX · Python · Procedural FX</p>
+
+    <header>
+        <img
+            src="pict/web_pict_01.png"
+            alt="Lab header"
+            onerror="this.style.display='none'"
+        >
+        <div class="header-text">
+            <h1>Welcome in <span>Chicken's</span> Lab</h1>
+            <p>// experiments &amp; projects //</p>
+        </div>
+    </header>
+
+    <div class="page">
+
+        <nav>
+            <a href="index.html">Home</a>
+
+            <div class="divider"></div>
+
+            <a href="houdini.html" class="active">Houdini</a>
+            <a href="houdini-vex.html" class="sub">VEX</a>
+            <a href="houdini-python.html" class="sub">Python</a>
+
+            <div class="divider"></div>
+
+            <a href="python.html">Python</a>
+            <a href="micropython.html">MicroPython</a>
+            <a href="diy.html">DIY</a>
+        </nav>
+
+        <main>
+
+            <!-- ------------------------------------------------
+                 INTRO  —  edit this text
+            ------------------------------------------------ -->
+            <h2>// Houdini</h2>
+
+            <p>
+                Houdini is a procedural 3D animation and FX software.
+                These pages collect notes, snippets and techniques from
+                daily work — VEX wrangles, Python scripts and general workflow tips.
+            </p>
+
+
+            <!-- ------------------------------------------------
+                 IMAGE / GIF
+                 Replace placeholder with:
+                 <img src="pict/your-image.gif" alt="description">
+            ------------------------------------------------ -->
+            <h2>// Overview</h2>
+
+            <div class="media-block">
+                <div class="caption">// screenshot or gif</div>
+
+                <!-- OPTION A — show a real image or gif: -->
+                <!-- <img src="pict/houdini_overview.gif" alt="Houdini overview"> -->
+
+                <!-- OPTION B — placeholder shown until you add an image: -->
+                <div class="placeholder">[ add image or gif here — pict/your-file.gif ]</div>
+            </div>
+
+            <p>
+                Add your description here. What does the image show?
+                What should the reader pay attention to?
+            </p>
+
+
+            <!-- ------------------------------------------------
+                 SUBTOPICS  —  links to sub-pages
+            ------------------------------------------------ -->
+            <h2>// Subtopics</h2>
+
+            <div class="cards">
+
+                <a href="houdini-vex.html" class="card">
+                    <h3>VEX</h3>
+                    <p>Attribute manipulation, noise, custom solvers.</p>
+                </a>
+
+                <a href="houdini-python.html" class="card">
+                    <h3>Python</h3>
+                    <p>Node scripting, HDAs, pipeline automation.</p>
+                </a>
+
+            </div>
+
+        </main>
+
     </div>
-  </header>
 
-  <div class="layout">
-    <nav>
-      <div class="nav-label">// Navigation</div>
-      <a href="index.html"><span>⬡</span> Home</a>
-      <div class="nav-divider"></div>
-      <a href="houdini.html" class="active"><span>◈</span> Houdini</a>
-      <a href="python.html"><span>◉</span> Python</a>
-      <a href="micropython.html"><span>◎</span> MicroPython</a>
-      <a href="diy.html"><span>⚙</span> DIY</a>
-    </nav>
+    <footer>
+        <span>Chicken's Lab</span>
+        <span>// all experiments may cause unexpected side effects //</span>
+    </footer>
 
-    <main>
-      <div class="section-title">// Core Topics</div>
-      <div class="topic-grid">
-        <div class="topic">
-          <h3>VEX Scripting</h3>
-          <p>Low-level procedural control for geometry, attributes and custom simulations.</p>
-          <ul>
-            <li>Attribute manipulation</li>
-            <li>Custom noise & patterns</li>
-            <li>Geometry instancing</li>
-            <li>Solver loops</li>
-          </ul>
-        </div>
-        <div class="topic">
-          <h3>Python SOPs</h3>
-          <p>Automate Houdini workflows with Python — from node creation to render submission.</p>
-          <ul>
-            <li>hou module scripting</li>
-            <li>Custom HDAs with callbacks</li>
-            <li>Procedural scene building</li>
-            <li>Pipeline tools</li>
-          </ul>
-        </div>
-        <div class="topic">
-          <h3>Procedural FX</h3>
-          <p>Destruction, fluids, pyro and rigid body dynamics built from scratch.</p>
-          <ul>
-            <li>Fracture & destruction</li>
-            <li>Pyro simulations</li>
-            <li>Vellum cloth / soft bodies</li>
-            <li>Flip fluids</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="section-title">// VEX Snippet</div>
-      <div class="code-block-label">// WRANGLE — scatter points on surface by curvature</div>
-      <div class="code-block">
-<span class="comment">// Get curvature attribute</span><br>
-<span class="keyword">float</span> curv = <span class="keyword">abs</span>(@curvature);<br>
-<span class="comment">// Threshold-based culling</span><br>
-<span class="keyword">if</span> (curv &lt; <span class="number">0.05</span>) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">removepoint</span>(<span class="number">0</span>, @ptnum);<br>
-}<br>
-<span class="comment">// Scale noise by curvature</span><br>
-<span class="keyword">vector</span> nz = noise(@P * <span class="number">2.5</span>);<br>
-@P += nz * curv * <span class="number">0.3</span>;
-      </div>
-
-      <div class="section-title">// Coming Soon</div>
-      <div class="topic">
-        <h3>Notebook</h3>
-        <p>Projects and tutorials will appear here. Check back for updates.</p>
-      </div>
-    </main>
-  </div>
-
-  <footer>
-    <span>CHICKEN'S LAB</span>
-    <span>HOUDINI</span>
-  </footer>
 </body>
 </html>

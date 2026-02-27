@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MicroPython — Chicken's Lab</title>
+    <title>Houdini Python — Chicken's Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -30,62 +30,60 @@
 
             <a href="houdini.html">Houdini</a>
             <a href="houdini-vex.html" class="sub">VEX</a>
-            <a href="houdini-python.html" class="sub">Python</a>
+            <a href="houdini-python.html" class="sub active">Python</a>
 
             <div class="divider"></div>
 
             <a href="python.html">Python</a>
-            <a href="micropython.html" class="active">MicroPython</a>
+            <a href="micropython.html">MicroPython</a>
             <a href="diy.html">DIY</a>
         </nav>
 
         <main>
 
-            <h2>// MicroPython</h2>
+            <!-- ------------------------------------------------
+                 INTRO
+            ------------------------------------------------ -->
+            <h2>// Houdini Python</h2>
 
             <p>
-                MicroPython on ESP32 WROOM and ESP32-S3.
-                GPIO, sensors, LVGL displays, WiFi and MQTT.
-                Notes from real hardware experiments.
+                Python in Houdini gives access to the full hou module —
+                create nodes, set parameters, build HDAs and automate
+                repetitive tasks directly from the shelf or a Python SOP.
             </p>
-
-
-            <!-- ------------------------------------------------
-                 IMAGE / GIF
-            ------------------------------------------------ -->
-            <h2>// Hardware Setup</h2>
-
-            <div class="media-block">
-                <div class="caption">// board or wiring photo</div>
-                <!-- <img src="pict/esp32_setup.jpg" alt="ESP32 setup"> -->
-                <div class="placeholder">[ add image or gif here — pict/your-file.jpg ]</div>
-            </div>
 
 
             <!-- ------------------------------------------------
                  CODE SNIPPET
             ------------------------------------------------ -->
-            <h2>// Example — Blink LED on ESP32</h2>
+            <h2>// Example — Create a node and set parameters</h2>
 
             <div class="code-block">
 <pre>
-<span class="c-keyword">from</span> machine <span class="c-keyword">import</span> Pin
-<span class="c-keyword">import</span> time
+<span class="c-keyword">import</span> hou
 
-<span class="c-comment"># Built-in LED on most WROOM boards is GPIO 2</span>
-led = <span class="c-function">Pin</span>(<span class="c-number">2</span>, Pin.OUT)
+<span class="c-comment"># Get the /obj network</span>
+obj = hou.<span class="c-function">node</span>(<span class="c-string">"/obj"</span>)
 
-<span class="c-keyword">while</span> <span class="c-keyword">True</span>:
-    led.<span class="c-function">value</span>(<span class="c-number">1</span>)
-    time.<span class="c-function">sleep_ms</span>(<span class="c-number">500</span>)
-    led.<span class="c-function">value</span>(<span class="c-number">0</span>)
-    time.<span class="c-function">sleep_ms</span>(<span class="c-number">500</span>)
+<span class="c-comment"># Create a new geometry node</span>
+geo = obj.<span class="c-function">createNode</span>(<span class="c-string">"geo"</span>, <span class="c-string">"my_geo"</span>)
+
+<span class="c-comment"># Create a sphere inside it</span>
+sphere = geo.<span class="c-function">createNode</span>(<span class="c-string">"sphere"</span>)
+sphere.<span class="c-function">parm</span>(<span class="c-string">"radx"</span>).<span class="c-function">set</span>(<span class="c-number">2.0</span>)
+
+<span class="c-comment"># Layout the nodes neatly</span>
+geo.<span class="c-function">layoutChildren</span>()
 </pre>
             </div>
 
+
+            <!-- ------------------------------------------------
+                 IMAGE / GIF
+            ------------------------------------------------ -->
             <div class="media-block">
-                <div class="caption">// blinking led</div>
-                <!-- <img src="pict/esp32_blink.gif" alt="ESP32 blinking LED"> -->
+                <div class="caption">// result in network editor</div>
+                <!-- <img src="pict/hou_python_nodes.png" alt="Houdini Python nodes"> -->
                 <div class="placeholder">[ add image or gif here — pict/your-file.gif ]</div>
             </div>
 
@@ -93,8 +91,8 @@ led = <span class="c-function">Pin</span>(<span class="c-number">2</span>, Pin.O
             <h2>// Notes</h2>
 
             <p>
-                Add your notes here — pin numbers, gotchas,
-                useful libraries, links to datasheets.
+                Add your notes here. Useful hou module functions,
+                gotchas, or workflow tips you want to remember.
             </p>
 
         </main>
