@@ -7,6 +7,7 @@
    #0e2228  — dark teal           (header, sidebar top)
    #172B36  — mid teal            (panels, cards)
    #1E536E  — medium teal         (borders, muted text)
+   #297196  — light teal          (sidebar hover, code numbers)
    #18A3B7  — bright teal         (hover links)
    #FF9932  — saffron orange      (accent, active, headings)
    #FFC801  — bright yellow       (accent highlight)
@@ -138,7 +139,7 @@ nav {
         #0a1a20 60%,
         #060e12 100%
     );
-    border-right: 2px solid #1E536E;
+    border-right: 2px solid #297196;
     padding: 28px 0;
 }
 
@@ -147,7 +148,7 @@ nav .nav-section {
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.6rem;
     letter-spacing: 3px;
-    color: #1E536E;
+    color: #297196;
     text-transform: uppercase;
     padding: 14px 20px 4px;
 }
@@ -156,7 +157,7 @@ nav .nav-section {
 nav a {
     display: block;
     padding: 10px 20px;
-    color: #1E536E;
+    color: #297196;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 600;
@@ -184,7 +185,7 @@ nav a.sub {
     font-size: 0.85rem;
     font-weight: 400;
     letter-spacing: 1px;
-    color: #1E536E;
+    color: #297196;
 }
 
 nav a.sub:hover {
@@ -224,7 +225,7 @@ main h2 {
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.68rem;
     letter-spacing: 5px;
-    color: #1E536E;
+    color: #297196;
     text-transform: uppercase;
     margin-bottom: 14px;
     margin-top: 36px;
@@ -261,7 +262,7 @@ main p {
     padding: 20px 22px;
     background: #080f14;
     border: 1px solid #0e2228;
-    border-left: 4px solid #1E536E;
+    border-left: 4px solid #297196;
     transition: all 0.15s ease;
 }
 
@@ -281,7 +282,7 @@ main p {
 
 .card p {
     font-size: 0.88rem;
-    color: #1E536E;
+    color: #297196;
     line-height: 1.5;
     margin: 0;
 }
@@ -293,7 +294,7 @@ main p {
 .code-block {
     background: #040a0d;
     border: 1px solid #0e2228;
-    border-left: 4px solid #FF9932;
+    border-left: 4px solid #297196;
     padding: 20px 24px;
     margin-bottom: 28px;
     overflow-x: auto;
@@ -307,7 +308,7 @@ main p {
 }
 
 /* Syntax highlight helpers — add these classes manually in your HTML */
-.code-block .c-comment  { color: #1E536E; }       /* comments     */
+.code-block .c-comment  { color: #297196; }       /* comments     */
 .code-block .c-keyword  { color: #FF9932; }        /* keywords     */
 .code-block .c-string   { color: #FFC801; }        /* strings      */
 .code-block .c-number   { color: #18A3B7; }        /* numbers      */
@@ -326,7 +327,7 @@ main p {
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.6rem;
     letter-spacing: 3px;
-    color: #1E536E;
+    color: #297196;
     text-transform: uppercase;
     margin-bottom: 8px;
 }
@@ -336,7 +337,7 @@ main p {
     display: block;
     max-width: 100%;
     border: 1px solid #0e2228;
-    border-left: 4px solid #1E536E;
+    border-left: 4px solid #297196;
 }
 
 /* Grey placeholder shown when no image is set */
@@ -344,13 +345,13 @@ main p {
     width: 100%;
     height: 200px;
     background: #080f14;
-    border: 1px dashed #1E536E;
+    border: 1px dashed #297196;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.7rem;
-    color: #1E536E;
+    color: #297196;
     letter-spacing: 2px;
 }
 
@@ -368,7 +369,7 @@ footer {
     border-top: 2px solid #0e2228;
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.65rem;
-    color: #1E536E;
+    color: #297196;
     letter-spacing: 3px;
     text-transform: uppercase;
     display: flex;
