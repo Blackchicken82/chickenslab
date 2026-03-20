@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUBE CNC — Parts List | Chicken's Lab</title>
+<style>
+  :root {
+    --bg:        #060e12;
+    --bg2:       #0a1a1f;
+    --bg3:       #0d2020;
+    --border:    #0d2020;
+    --accent:    #FF9932;
+    --accent2:   #cc7a28;
+    --text:      #e8f4f0;
+    --muted:     #4a7a70;
+    --green:     #2a9d6a;
+    --red:       #c0392b;
+    --blue:      #2a7ab5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg2);
+  }
+
+  .logo {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--muted); }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  .hero {
+    padding: 48px 32px 32px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    letter-spacing: 4px;
+    color: var(--text);
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 680px;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+
+  .hero-meta-item .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .hero-meta-item .value {
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  main { padding: 32px; max-width: 1300px; }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    font-size: 12px;
+    color: var(--muted);
+    align-items: center;
+  }
+
+  .legend strong {
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+
+  .status {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .status-have  { background: var(--green); }
+  .status-order { background: var(--accent); }
+  .status-tbd   { background: var(--muted); }
+
+  .section { margin-bottom: 48px; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header h2 {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .section-header .section-note {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+  thead tr { border-bottom: 1px solid var(--border); }
+
+  thead th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: normal;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: var(--bg2); }
+
+  tbody td { padding: 10px 12px; vertical-align: middle; }
+
+  .td-status { width: 24px; text-align: center; }
+  .td-qty    { color: var(--accent); font-weight: bold; white-space: nowrap; width: 60px; }
+  .td-part   { color: var(--text); font-weight: bold; min-width: 180px; }
+  .td-spec   { color: var(--muted); font-size: 12px; }
+  .td-source { white-space: nowrap; }
+  .td-note   { color: var(--muted); font-size: 12px; font-style: italic; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .badge-tme     { background: #0e2236; color: #5ba8e0; border: 1px solid #1a4060; }
+  .badge-gme     { background: #0e2210; color: #5be05b; border: 1px solid #1a4020; }
+  .badge-ehlinik { background: #2a1800; color: var(--accent); border: 1px solid #4a2e00; }
+  .badge-print   { background: #0e1e2a; color: #5bd0e0; border: 1px solid #1a3a4a; }
+  .badge-father  { background: #102010; color: #a0d080; border: 1px solid #2a4a1a; }
+  .badge-tbd     { background: #1a1a1a; color: var(--muted); border: 1px solid #2a2a2a; }
+
+  .page-note {
+    margin-top: 48px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2;
+    letter-spacing: 0.3px;
+  }
+
+  .page-note strong { color: var(--accent); }
+
+  .rev-tag {
+    float: right;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 768px) {
+    header { flex-direction: column; gap: 12px; }
+    .hero { padding: 28px 16px; }
+    main  { padding: 16px; }
+    .hero h1 { font-size: 24px; }
+    .td-spec, .td-note { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo">CHICKEN<span>'S</span> LAB</a>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Houdini</a>
+    <a href="#">Python</a>
+    <a href="#">DIY</a>
+    <a href="#">ROV</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">// project — pcb cnc router</div>
+  <h1>CUBE <span>CNC</span><br>Parts List</h1>
+  <p class="hero-sub">
+    Desktop enclosed PCB router. 2020 aluminium profile cube frame, ~35×35×35cm overall,
+    20×20cm work area. 24V system. ROS2 + GRBL software stack.
+    Acrylic panel enclosure for noise and debris containment.
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="label">Work Area</span>
+      <span class="value">200 × 200 mm</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Frame</span>
+      <span class="value">2020 Al Profile</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Supply</span>
+      <span class="value">24 V DC</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Axes</span>
+      <span class="value">3 × NEMA 17</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Status</span>
+      <span class="value">Design Phase</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <strong>Status:</strong>
+    <div class="legend-item"><span class="status status-have"></span> In stock</div>
+    <div class="legend-item"><span class="status status-order"></span> To order</div>
+    <div class="legend-item"><span class="status status-tbd"></span> TBD / sizing</div>
+    &nbsp;&nbsp;
+    <strong>Source:</strong>
+    <span class="badge badge-ehlinik">eHliník</span>
+    <span class="badge badge-tme">TME</span>
+    <span class="badge badge-gme">GME</span>
+    <span class="badge badge-print">3D Print</span>
+    <span class="badge badge-father">Dad's CNC</span>
+    <span class="badge badge-tbd">TBD</span>
+  </div>
+
+  <!-- ── FRAME ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Frame — 2020 Aluminium Profile</h2>
+      <span class="section-note">eHliník K20 system · direct tapped M5 center holes · drilling jig recommended</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Qty</th>
+          <th>Part</th>
+          <th>Specification</th>
+          <th>Source</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">12×</td>
+          <td class="td-part">Profile 2020 — 350 mm</td>
+          <td class="td-spec">20×20mm T-slot, K20 system, natural anodised</td>
+          <td class="td-source"><span class="badge badge-ehlinik">eHliník</span></td>
+          <td class="td-note">Cube vertical + horizontal members. Cut to length.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">4×</td>
+          <td class="td-part">Profile 2020 — gantry rail</td>
+          <td class="td-spec">Length TBD after axis design. X + Y rails.</td>
+          <td class="td-source"><span class="badge badge-ehlinik">eHliník</span></td>
+          <td class="td-note">Size depends on linear rail choice and carriage travel.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Drilling jig — 2020 center</td>
+          <td class="td-spec">Printed PA-CF, metal insert, precise M5 center tap guide</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-note">Ensures repeatable hole position for screw-direct assembly. No brackets needed on structural joints.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">~40×</td>
+          <td class="td-part">M5 × 8 mm button head screw</td>
+          <td class="td-spec">ISO 7380, stainless A2, M5×8</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">Direct screw into tapped profile center. Clean, bracketless cube joints.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">~20×</td>
+          <td class="td-part">Corner bracket 2020</td>
+          <td class="td-spec">Hidden angle bracket, internal, for gantry and rail joints only</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">Used only where direct tapping not sufficient. Minimise count.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">~30×</td>
+          <td class="td-part">T-nut M5 — sliding</td>
+          <td class="td-spec">Post-assembly T-nut, spring loaded, M5</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">For panel mounting, cable chain anchors, adjustable positions.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── MOTION ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Motion System</h2>
+      <span class="section-note">3-axis Cartesian · linear rails or V-slot · NEMA 17</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Qty</th>
+          <th>Part</th>
+          <th>Specification</th>
+          <th>Source</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">3×</td>
+          <td class="td-part">NEMA 17 stepper</td>
+          <td class="td-spec">1.8°, 40-48mm body, ≥40 N·cm, 24V rated driver</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">Standard size suitable for 20×20cm work area. Z-axis can be lighter.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">3×</td>
+          <td class="td-part">TMC2209 stepper driver</td>
+          <td class="td-spec">UART mode, 24V, 2A RMS, StealthChop + SpreadCycle</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">Same driver as Prusa ecosystem. Silent operation, great at 24V.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">2×</td>
+          <td class="td-part">Linear rail MGN12</td>
+          <td class="td-spec">MGN12H carriage, 250-300mm length, X+Y axes</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Precise, low friction. Length TBD after frame finalised.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Linear rail MGN9</td>
+          <td class="td-spec">MGN9H carriage, 100-150mm, Z axis</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Lighter Z — less moving mass improves Z speed and accuracy.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">3×</td>
+          <td class="td-part">Lead screw TR8×8</td>
+          <td class="td-spec">T8 trapezoidal, 8mm lead, 250-300mm, + brass nut</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Standard CNC leadscrew. Low backlash brass nut. Anti-backlash nut option.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">3×</td>
+          <td class="td-part">Flexible shaft coupler</td>
+          <td class="td-spec">5mm to 8mm, spider or bellows type</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Bellows preferred for Z accuracy. Spider acceptable for X/Y.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">6×</td>
+          <td class="td-part">End stop switch</td>
+          <td class="td-spec">Mechanical microswitch, homing, 1× per axis end</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">Reliable homing reference. Hall sensor option for cleaner install.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── SPINDLE ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Spindle</h2>
+      <span class="section-note">PCB routing · 10k–30k RPM · light cutting forces</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Qty</th>
+          <th>Part</th>
+          <th>Specification</th>
+          <th>Source</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Brushless spindle motor</td>
+          <td class="td-spec">300–500W, 24V, ER11 collet, 20k+ RPM</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">PCB routing bits are tiny — high RPM and low runout critical.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Spindle speed controller</td>
+          <td class="td-spec">PWM ESC or DC controller, 24V, matches spindle</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Isolate from logic electronics to prevent noise injection.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Dust shoe</td>
+          <td class="td-spec">Printed PA-CF, fits spindle diameter, vacuum hose port</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-note">FR4 dust is glass fibre — essential containment. Connects to shop vac.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">set</td>
+          <td class="td-part">PCB routing bits</td>
+          <td class="td-spec">0.8–1.2mm isolation, 0.3–1.0mm drill, 2mm outline cut</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Carbide only. Cheap bits destroy trace quality.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── ELECTRONICS ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Electronics &amp; Power</h2>
+      <span class="section-note">24V main bus · ESP32 GRBL controller · RECOM stepdowns · Mean Well PSU</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Qty</th>
+          <th>Part</th>
+          <th>Specification</th>
+          <th>Source</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Mean Well LRS-150-24</td>
+          <td class="td-spec">150W, 24V / 6.5A, enclosed, CE certified</td>
+          <td class="td-source"><span class="badge badge-gme">GME</span></td>
+          <td class="td-note">Main 24V bus. Comfortable headroom for 3× NEMA17 + spindle. GME, 15min walk.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">RECOM R-78E5.0-1.0</td>
+          <td class="td-spec">24V → 5V, 1A, SIP3, 93% efficiency</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">Logic 5V rail. No heatsink needed. Fixed output, clean footprint.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-order"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">RECOM R-78E3.3-1.0</td>
+          <td class="td-spec">24V → 3.3V, 1A, SIP3, 91% efficiency</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">ESP32 + sensor rail. Verify input range 7–28V ✓ covers 24V.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">ESP32 WROOM-32</td>
+          <td class="td-spec">Bare module or dev board, GRBL-ESP32 firmware</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">GRBL controller core. WiFi enables wireless job upload. ROS2 serial bridge.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Raspberry Pi 4B / 5</td>
+          <td class="td-spec">2GB+ RAM, ROS2 Humble/Jazzy host</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">High-level: ROS2 nodes, toolpath processing, vision (future). Optional for V1.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">LVGL display — TFT colour</td>
+          <td class="td-spec">3.5–4" SPI, ILI9488 or ST7796, 320×480</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Live XYZ position, spindle state, job progress. MicroPython + LVGL UI.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Controller PCB</td>
+          <td class="td-spec">Custom KiCad design — ESP32, stepper drivers, RECOM modules</td>
+          <td class="td-source"><span class="badge badge-print">Own CNC</span></td>
+          <td class="td-note">First real board milled on the CUBE itself. Bootstrapping moment.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── ENCLOSURE ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Enclosure &amp; Panels</h2>
+      <span class="section-note">Acrylic side panels · noise + debris containment · portable cube</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Qty</th>
+          <th>Part</th>
+          <th>Specification</th>
+          <th>Source</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">4×</td>
+          <td class="td-part">Acrylic panel — side</td>
+          <td class="td-spec">4mm clear acrylic, ~340×340mm, T-slot edge fit</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Slides into 2020 groove, no fasteners. Removable for access.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Polycarbonate panel — front door</td>
+          <td class="td-spec">4–5mm PC, hinged or sliding. Impact resistant.</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">PC preferred over acrylic for front — broken bits can become projectiles.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Bottom spoilboard panel</td>
+          <td class="td-spec">MDF or HDPE, ~200×200mm, sacrificial surface</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Sacrificial. Contains registration pin holes for 2-sided PCB flipping.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">2×</td>
+          <td class="td-part">Registration pins</td>
+          <td class="td-spec">3–4mm hardened steel dowel pin, 20mm length</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">2-sided PCB alignment. Same technique as dad's woodworking jigs.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Electronics bay module</td>
+          <td class="td-spec">Printed PETG-CF, rear panel integrated, DIN clips</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-note">All electronics in one removable module. PSU, drivers, ESP32, connectors.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">2×</td>
+          <td class="td-part">Cable drag chain</td>
+          <td class="td-spec">10×10mm or 10×15mm inner, length TBD per axis</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Stepper + limit switch cables. Spindle cable separate chain — noise isolation.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">4×</td>
+          <td class="td-part">Rubber anti-vibration feet</td>
+          <td class="td-spec">M5 thread, 20–30mm dia, shore ~50A</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-note">Decouple spindle vibration from desk surface. Also protects desk.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── PRINTED PARTS ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// 3D Printed Parts</h2>
+      <span class="section-note">PA-CF structural · PETG-CF enclosure · PA-CF dust shoe — CORE One L</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Qty</th>
+          <th>Part</th>
+          <th>Specification</th>
+          <th>Source</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">3×</td>
+          <td class="td-part">Motor mount — NEMA 17</td>
+          <td class="td-spec">PA-CF, M3 mounting, integrated leadscrew bearing seat</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-note">PA-CF handles vibration and clamping stress well. Real-world material test.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">3×</td>
+          <td class="td-part">Axis end plate</td>
+          <td class="td-spec">PA-CF or machined Al — bearing housing, rail end stop</td>
+          <td class="td-source"><span class="badge badge-father">Dad's CNC</span></td>
+          <td class="td-note">If Al machined: precise flat face for rail alignment. Print as prototype first.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Spindle mount / carriage</td>
+          <td class="td-spec">PA-CF, fits spindle diameter, Z rail carriage interface</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-note">Critical part — must hold Z height rigidly. PA-CF + carbon rod reinforcement.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Dust shoe</td>
+          <td class="td-spec">PA-CF, split design for bit changes, vacuum hose port</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-note">FR4 is glass fibre dust — protect lungs and carpet.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">2020 drilling jig</td>
+          <td class="td-spec">PA-CF body, M5 metal insert, V-groove self-locating</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-note">Self-locates on profile centre. Enables bracketless direct-tap assembly.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-note">
+    <strong>// design notes</strong><br>
+    Frame uses direct M5 screw-into-tapped-centre-hole method where possible — cleaner assembly,
+    fewer parts, no hidden bracket cost. Drilling jig (printed PA-CF with metal insert) ensures
+    repeatable hole position across all frame joints. Corner brackets used only where direct tapping
+    is geometrically insufficient.<br><br>
+    <strong>// power architecture</strong><br>
+    24V main bus (same as Prusa MK3S ecosystem). Better stepper torque at speed, lower wiring losses,
+    standard spindle voltage. RECOM R-78E modules handle 24V→5V and 24V→3.3V for all logic.
+    Mean Well LRS-150-24 available at GME, 15 min walk.<br><br>
+    <strong>// registration pins</strong><br>
+    Spoilboard carries two steel dowel pins at known coordinates for 2-sided PCB flipping.
+    Same technique used in dad's woodworking — proven concept, tighter tolerances.
+    Enables double-sided PCB production covering ~90% of real board designs.<br><br>
+    <strong>// software stack</strong><br>
+    GRBL-ESP32 for real-time step generation · KiCad → FlatCAM → G-code pipeline ·
+    ROS2 Python on Raspberry Pi for job management and future automation ·
+    LVGL display for local machine state — no laptop required for running a job.
+    <span class="rev-tag">rev 0.1 — design phase</span>
+  </div>
+
+</main>
+</body>
+</html>
