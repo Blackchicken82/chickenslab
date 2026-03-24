@@ -266,18 +266,18 @@
   <div class="hero-tag">// project — pcb cnc router</div>
   <h1>CUBE <span>CNC</span><br>Parts List</h1>
   <p class="hero-sub">
-    Desktop enclosed PCB router. 2020 aluminium profile cube frame, ~35×35×35cm overall,
-    20×20cm work area. 24V system. ROS2 + GRBL software stack.
+    Desktop enclosed PCB router. 2020 aluminium profile cube frame, 300×300×300mm overall,
+    ~200×200mm work area. 24V system. FluidNC + bCNC software stack.
     Acrylic panel enclosure for noise and debris containment.
   </p>
   <div class="hero-meta">
     <div class="hero-meta-item">
       <span class="label">Work Area</span>
-      <span class="value">200 × 200 mm</span>
+      <span class="value">~200 × 200 mm</span>
     </div>
     <div class="hero-meta-item">
       <span class="label">Frame</span>
-      <span class="value">2020 Al Profile</span>
+      <span class="value">300 × 300 × 300 mm</span>
     </div>
     <div class="hero-meta-item">
       <span class="label">Supply</span>
@@ -288,6 +288,10 @@
       <span class="value">3 × NEMA 17</span>
     </div>
     <div class="hero-meta-item">
+      <span class="label">Control</span>
+      <span class="value">FluidNC + bCNC</span>
+    </div>
+    <div class="hero-meta-item">
       <span class="label">Status</span>
       <span class="value">Design Phase</span>
     </div>
@@ -295,6 +299,271 @@
 </div>
 
 <main>
+
+  <!-- ── SKETCHES ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Front View</h2>
+      <span class="section-note">300×300mm · right col 120mm · display zone 120×150mm · controls zone 120×150mm · ~200×200mm work area</span>
+    </div>
+    <svg width="100%" viewBox="0 0 700 580" style="display:block;margin-bottom:8px">
+      <!-- scale: 300mm=480px, 1mm=1.6px
+           outer frame: x=80..560, y=48..528
+           vertical divider at x=368 (left=288px=180mm, right col=192px=120mm)
+           display zone: y=62..302 (240px=150mm)
+           horiz divider: y=302..316
+           controls zone: y=316..514 (198px≈124mm)
+           display bezel 78mm=125px centred in 164px col → x=402..527
+           display height 120mm=192px → y=70..262, brightness pot y=262..302 -->
+
+      <!-- DIMS top -->
+      <line x1="80" y1="34" x2="560" y2="34" stroke="#4a7a70" stroke-width="0.5" marker-start="url(#da)" marker-end="url(#da)"/>
+      <defs><marker id="da" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#4a7a70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <text font-family="Courier New" font-size="11" fill="#4a7a70" x="320" y="30" text-anchor="middle">300 mm</text>
+      <!-- DIMS left -->
+      <line x1="60" y1="48" x2="60" y2="528" stroke="#4a7a70" stroke-width="0.5" marker-start="url(#da)" marker-end="url(#da)"/>
+      <text font-family="Courier New" font-size="11" fill="#4a7a70" x="38" y="290" text-anchor="middle" transform="rotate(-90,38,290)">300 mm</text>
+
+      <!-- OUTER FRAME 2020 -->
+      <rect x="80"  y="48"  width="480" height="14" rx="3" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <rect x="80"  y="514" width="480" height="14" rx="3" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <rect x="80"  y="48"  width="14"  height="480" rx="3" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <rect x="546" y="48"  width="14"  height="480" rx="3" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="320" y="46"  text-anchor="middle">2020</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="320" y="542" text-anchor="middle">2020</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="72"  y="290" text-anchor="middle" transform="rotate(-90,72,290)">2020</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="558" y="290" text-anchor="middle" transform="rotate(-90,558,290)">2020</text>
+
+      <!-- LEFT AREA — PC door -->
+      <rect x="94" y="62" width="274" height="452" rx="3" fill="#060e12" stroke="#0d2020" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" fill="#4a7a70" x="231" y="270" text-anchor="middle">PC front door</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="231" y="286" text-anchor="middle">4mm · hinged · impact resistant</text>
+
+      <!-- work table -->
+      <rect x="94" y="460" width="274" height="10" rx="2" fill="#0a1a1f" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="231" y="458" text-anchor="middle">2020 work table · spoilboard</text>
+
+      <!-- X rail dashed -->
+      <rect x="94" y="196" width="274" height="7" rx="2" fill="#0a1a1f" stroke="#4a7a70" stroke-width="0.5" stroke-dasharray="4 3"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="100" y="194">X rail</text>
+
+      <!-- spindle 52mm=83px wide, 100mm=160px tall -->
+      <rect x="190" y="203" width="83" height="160" rx="10" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1.5"/>
+      <line x1="190" y1="227" x2="273" y2="227" stroke="#4a7a70" stroke-width="0.5"/>
+      <line x1="190" y1="245" x2="273" y2="245" stroke="#4a7a70" stroke-width="0.5"/>
+      <!-- ER11 -->
+      <rect x="200" y="363" width="63" height="16" rx="5" fill="#060e12" stroke="#e8f4f0" stroke-width="1"/>
+      <!-- bit -->
+      <line x1="232" y1="379" x2="232" y2="452" stroke="#4a7a70" stroke-width="2" stroke-linecap="round"/>
+      <!-- spindle label -->
+      <line x1="273" y1="283" x2="296" y2="283" stroke="#0d2020" stroke-width="0.5" stroke-dasharray="2 2"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="298" y="276">300–500W · 24V</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="298" y="290">ER11 · ~52mm dia</text>
+      <!-- Z dim -->
+      <line x1="166" y1="379" x2="166" y2="452" stroke="#4a7a70" stroke-width="0.5" marker-start="url(#da)" marker-end="url(#da)"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="144" y="418" text-anchor="middle" transform="rotate(-90,144,418)">Z ~60mm</text>
+
+      <!-- VERTICAL 2020 DIVIDER at x=368 -->
+      <rect x="368" y="48" width="14" height="480" rx="3" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="375" y="46" text-anchor="middle">2020</text>
+
+      <!-- right col width dim -->
+      <line x1="382" y1="34" x2="546" y2="34" stroke="#4a7a70" stroke-width="0.5" marker-start="url(#da)" marker-end="url(#da)"/>
+      <text font-family="Courier New" font-size="11" fill="#4a7a70" x="464" y="30" text-anchor="middle">120 mm</text>
+
+      <!-- HORIZONTAL 2020 DIVIDER at y=302 (150mm=240px from y=62) -->
+      <rect x="382" y="302" width="164" height="14" rx="3" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="554" y="311" text-anchor="start">2020</text>
+
+      <!-- display zone height dim 150mm -->
+      <line x1="598" y1="62" x2="598" y2="302" stroke="#4a7a70" stroke-width="0.5" marker-start="url(#da)" marker-end="url(#da)"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="622" y="184" text-anchor="middle" transform="rotate(90,622,184)">150 mm</text>
+
+      <!-- controls zone height dim 150mm -->
+      <line x1="598" y1="316" x2="598" y2="514" stroke="#4a7a70" stroke-width="0.5" marker-start="url(#da)" marker-end="url(#da)"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="622" y="417" text-anchor="middle" transform="rotate(90,622,417)">150 mm</text>
+
+      <!-- DISPLAY ZONE 120×150mm -->
+      <rect x="382" y="62" width="164" height="240" rx="3" fill="#060e12" stroke="#0d2020" stroke-width="0.5"/>
+
+      <!-- 5" display bezel 78mm=125px wide, 120mm=192px tall centred in 164px col
+           margin=(164-125)/2=20px → x=402..527, y=70..262 -->
+      <rect x="402" y="70" width="125" height="192" rx="4" fill="#0a1a2a" stroke="#FF9932" stroke-width="1"/>
+      <text font-family="Courier New" font-size="12" font-weight="bold" fill="#e8f4f0" x="464" y="155" text-anchor="middle">5"</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="464" y="172" text-anchor="middle">portrait · touch</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="464" y="186" text-anchor="middle">78 × 120 mm</text>
+
+      <!-- display width dim -->
+      <line x1="402" y1="268" x2="527" y2="268" stroke="#4a7a70" stroke-width="0.5" marker-start="url(#da)" marker-end="url(#da)"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="464" y="264" text-anchor="middle">78 mm</text>
+
+      <!-- brightness pot centred below display above divider y=262..302 -->
+      <circle cx="464" cy="285" r="12" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <circle cx="464" cy="285" r="7"  fill="#060e12" stroke="#4a7a70" stroke-width="0.5"/>
+      <line x1="464" y1="285" x2="464" y2="275" stroke="#e8f4f0" stroke-width="1.5" stroke-linecap="round"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="464" y="299" text-anchor="middle">brightness</text>
+
+      <!-- CONTROLS ZONE 120×150mm -->
+      <rect x="382" y="316" width="164" height="198" rx="3" fill="#060e12" stroke="#0d2020" stroke-width="0.5"/>
+
+      <!-- 2×2 grid + pause centre
+           col: x=422, x=506  row1: y=358  row2: y=432  pause: y=492 -->
+
+      <!-- E-stop 22mm row1 left -->
+      <circle cx="422" cy="358" r="26" fill="#1a0808" stroke="#c0392b" stroke-width="1.5"/>
+      <circle cx="422" cy="358" r="16" fill="#c0392b" stroke="#e05050" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="9" font-weight="bold" fill="#e8f4f0" x="422" y="355" text-anchor="middle">E</text>
+      <text font-family="Courier New" font-size="9" font-weight="bold" fill="#e8f4f0" x="422" y="365" text-anchor="middle">STOP</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="422" y="390" text-anchor="middle">22mm</text>
+
+      <!-- power row1 right -->
+      <circle cx="506" cy="358" r="22" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <circle cx="506" cy="358" r="13" fill="#060e12" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="506" y="386" text-anchor="middle">power</text>
+
+      <!-- feed pot row2 left -->
+      <circle cx="422" cy="444" r="20" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <circle cx="422" cy="444" r="12" fill="#060e12" stroke="#4a7a70" stroke-width="0.5"/>
+      <line x1="422" y1="444" x2="422" y2="432" stroke="#e8f4f0" stroke-width="1.5" stroke-linecap="round"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="422" y="470" text-anchor="middle">feed</text>
+
+      <!-- spindle pot row2 right -->
+      <circle cx="506" cy="444" r="20" fill="#0a1a1f" stroke="#e8f4f0" stroke-width="1"/>
+      <circle cx="506" cy="444" r="12" fill="#060e12" stroke="#4a7a70" stroke-width="0.5"/>
+      <line x1="506" y1="444" x2="514" y2="434" stroke="#e8f4f0" stroke-width="1.5" stroke-linecap="round"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="506" y="470" text-anchor="middle">spindle</text>
+
+      <!-- pause illuminated centred bottom -->
+      <circle cx="464" cy="496" r="16" fill="#0a1a10" stroke="#2a9d6a" stroke-width="1.5"/>
+      <circle cx="464" cy="496" r="9"  fill="#0d2a18" stroke="#2a9d6a" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="10" fill="#2a9d6a" x="464" y="518" text-anchor="middle">pause</text>
+
+      <!-- NOTES -->
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="320" y="554" text-anchor="middle">300×300mm · left: 4mm PC hinged door · right col 120mm · display 120×150mm · controls 120×150mm</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="320" y="568" text-anchor="middle">work area ~200×200mm · spindle 300–500W 24V · ER11 · Z ~60mm travel · all panels slide into 2020 T-slot</text>
+    </svg>
+  </div>
+
+  <!-- ── ELECTRONICS LAYOUT ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Electronics Bay Layout</h2>
+      <span class="section-note">bottom panel · modular boards · 2.54mm proto · PSU under work plate</span>
+    </div>
+    <svg width="100%" viewBox="0 0 680 520" style="display:block;margin-bottom:8px">
+      <!-- OUTER: bottom panel container -->
+      <rect x="20" y="30" width="640" height="460" rx="16" fill="none" stroke="#0d2020" stroke-width="1" stroke-dasharray="5 3"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="36" y="22">CUBE — bottom panel electronics bay</text>
+      <!-- LEFT ZONE: Power -->
+      <rect x="36" y="46" width="148" height="200" rx="10" fill="#0a1a1f" stroke="#FF9932" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="12" font-weight="bold" fill="#FF9932" x="110" y="66" text-anchor="middle">Power</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="110" y="80" text-anchor="middle">24V main bus</text>
+      <!-- Mean Well -->
+      <rect x="50" y="92" width="120" height="44" rx="6" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="12" font-weight="bold" fill="#e8f4f0" x="110" y="111" text-anchor="middle">Mean Well</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="110" y="127" text-anchor="middle">LRS-150-24 · 24V</text>
+      <!-- RECOM x2 -->
+      <rect x="50" y="148" width="56" height="44" rx="6" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="78" y="167" text-anchor="middle">RECOM</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="78" y="183" text-anchor="middle">→ 5V</text>
+      <rect x="114" y="148" width="56" height="44" rx="6" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="142" y="167" text-anchor="middle">RECOM</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="142" y="183" text-anchor="middle">→ 3.3V</text>
+      <!-- Spindle ESC -->
+      <rect x="50" y="204" width="120" height="30" rx="6" fill="#1a0808" stroke="#c0392b" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="110" y="219" text-anchor="middle">Spindle ESC</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="110" y="231" text-anchor="middle">24V isolated</text>
+      <!-- CENTRE: Motion board -->
+      <rect x="200" y="46" width="240" height="200" rx="10" fill="#0a1a1f" stroke="#2a9d6a" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="12" font-weight="bold" fill="#2a9d6a" x="320" y="66" text-anchor="middle">Motion board</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="320" y="80" text-anchor="middle">2.54mm proto · Dupont headers</text>
+      <!-- ESP32-S3 -->
+      <rect x="214" y="92" width="100" height="56" rx="6" fill="#0a2236" stroke="#2a7ab5" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="12" font-weight="bold" fill="#e8f4f0" x="264" y="115" text-anchor="middle">ESP32-S3</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="264" y="133" text-anchor="middle">FluidNC</text>
+      <!-- TMC2209 stack -->
+      <rect x="326" y="92" width="100" height="56" rx="6" fill="#1a0a2a" stroke="#534AB7" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="376" y="111" text-anchor="middle">TMC2209</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="376" y="127" text-anchor="middle">×3 · removable</text>
+      <!-- End stops -->
+      <rect x="214" y="162" width="100" height="30" rx="6" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="264" y="180" text-anchor="middle">End stops ×3</text>
+      <!-- Motor headers -->
+      <rect x="326" y="162" width="100" height="30" rx="6" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="376" y="180" text-anchor="middle">Motor headers</text>
+      <!-- Serial line ESP → RPi -->
+      <line x1="314" y1="120" x2="458" y2="120" stroke="#2a9d6a" stroke-width="1" stroke-dasharray="4 2" fill="none"/>
+      <polygon points="458,116 466,120 458,124" fill="#2a9d6a"/>
+      <text font-family="Courier New" font-size="10" fill="#2a9d6a" x="386" y="113" text-anchor="middle">serial TX/RX</text>
+      <!-- RIGHT ZONE: Brain -->
+      <rect x="456" y="46" width="188" height="200" rx="10" fill="#0a1a1f" stroke="#2a7ab5" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="12" font-weight="bold" fill="#2a7ab5" x="550" y="66" text-anchor="middle">Brain</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="550" y="80" text-anchor="middle">RPi Zero 2W stack</text>
+      <!-- RPi Zero -->
+      <rect x="470" y="92" width="160" height="44" rx="6" fill="#0a2236" stroke="#2a7ab5" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="12" font-weight="bold" fill="#e8f4f0" x="550" y="111" text-anchor="middle">RPi Zero 2W</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="550" y="127" text-anchor="middle">bCNC · Linux</text>
+      <!-- OTG hub -->
+      <rect x="470" y="148" width="72" height="44" rx="6" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="506" y="167" text-anchor="middle">OTG hub</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="506" y="183" text-anchor="middle">1→3 USB</text>
+      <!-- SSD -->
+      <rect x="554" y="148" width="76" height="44" rx="6" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="592" y="167" text-anchor="middle">SSD 240G</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="592" y="183" text-anchor="middle">SATA-USB</text>
+      <!-- OUTPUTS label -->
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="36" y="272">outputs</text>
+      <line x1="36" y1="278" x2="644" y2="278" stroke="#0d2020" stroke-width="0.5"/>
+      <!-- Motor X -->
+      <rect x="36" y="288" width="100" height="44" rx="8" fill="#1a0a2a" stroke="#534AB7" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="86" y="307" text-anchor="middle">NEMA 17 X</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="86" y="323" text-anchor="middle">stepper</text>
+      <!-- Motor Y -->
+      <rect x="148" y="288" width="100" height="44" rx="8" fill="#1a0a2a" stroke="#534AB7" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="198" y="307" text-anchor="middle">NEMA 17 Y</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="198" y="323" text-anchor="middle">stepper</text>
+      <!-- Motor Z -->
+      <rect x="260" y="288" width="100" height="44" rx="8" fill="#1a0a2a" stroke="#534AB7" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="310" y="307" text-anchor="middle">NEMA 17 Z</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="310" y="323" text-anchor="middle">stepper</text>
+      <!-- Spindle -->
+      <rect x="372" y="288" width="100" height="44" rx="8" fill="#1a0808" stroke="#c0392b" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="422" y="307" text-anchor="middle">Spindle</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="422" y="323" text-anchor="middle">24V brushless</text>
+      <!-- Display -->
+      <rect x="484" y="288" width="100" height="44" rx="8" fill="#0a1a2a" stroke="#2a9d6a" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="534" y="307" text-anchor="middle">5" display</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="534" y="323" text-anchor="middle">HDMI + touch</text>
+      <!-- Camera -->
+      <rect x="596" y="288" width="48" height="44" rx="8" fill="#0a1a2a" stroke="#2a9d6a" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="620" y="307" text-anchor="middle">Cam</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="620" y="323" text-anchor="middle">CSI</text>
+      <!-- Arrows motion → motors -->
+      <line x1="264" y1="192" x2="86" y2="288" stroke="#0d2020" stroke-width="0.5" fill="none"/>
+      <line x1="290" y1="192" x2="198" y2="288" stroke="#0d2020" stroke-width="0.5" fill="none"/>
+      <line x1="320" y1="192" x2="310" y2="288" stroke="#0d2020" stroke-width="0.5" fill="none"/>
+      <!-- Spindle ESC → spindle -->
+      <line x1="110" y1="234" x2="422" y2="288" stroke="#c0392b" stroke-width="0.5" stroke-dasharray="3 2" fill="none"/>
+      <!-- RPi → display/cam -->
+      <line x1="550" y1="246" x2="534" y2="288" stroke="#0d2020" stroke-width="0.5" fill="none"/>
+      <line x1="570" y1="246" x2="620" y2="288" stroke="#0d2020" stroke-width="0.5" fill="none"/>
+      <!-- FRONT PANEL label -->
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="36" y="358">front panel</text>
+      <line x1="36" y1="364" x2="644" y2="364" stroke="#0d2020" stroke-width="0.5"/>
+      <!-- Display panel -->
+      <rect x="36" y="374" width="200" height="56" rx="8" fill="#0a1a1f" stroke="#2a9d6a" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="136" y="397" text-anchor="middle">5" touch display</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="136" y="413" text-anchor="middle">portrait · bCNC fullscreen</text>
+      <!-- Control panel -->
+      <rect x="248" y="374" width="396" height="56" rx="8" fill="#0d2020" stroke="#4a7a70" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="11" font-weight="bold" fill="#e8f4f0" x="446" y="397" text-anchor="middle">Control panel</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="446" y="413" text-anchor="middle">E-stop · power · feed pot · spindle pot · pause · brightness pot</text>
+      <!-- Divider profile -->
+      <rect x="36" y="444" width="608" height="6" rx="2" fill="#0d2020" stroke="#FF9932" stroke-width="0.5"/>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="340" y="458" text-anchor="middle">2020 horizontal profile divider</text>
+      <text font-family="Courier New" font-size="10" fill="#4a7a70" x="340" y="474" text-anchor="middle">spindle ESC isolated · separate cable chain · serial ESP32 ↔ RPi Zero</text>
+    </svg>
+  </div>
 
   <!-- LEGEND -->
   <div class="legend">
@@ -316,7 +585,7 @@
   <div class="section">
     <div class="section-header">
       <h2>// Frame — 2020 Aluminium Profile</h2>
-      <span class="section-note">eHliník K20 system · direct tapped M5 center holes · drilling jig recommended</span>
+      <span class="section-note">eHliník K20 system · 300×300×300mm cube · direct tapped M5 center holes · drilling jig recommended</span>
     </div>
     <table>
       <thead>
@@ -333,10 +602,10 @@
         <tr>
           <td class="td-status"><span class="status status-order"></span></td>
           <td class="td-qty">12×</td>
-          <td class="td-part">Profile 2020 — 350 mm</td>
+          <td class="td-part">Profile 2020 — 300 mm</td>
           <td class="td-spec">20×20mm T-slot, K20 system, natural anodised</td>
           <td class="td-source"><span class="badge badge-ehlinik">eHliník</span></td>
-          <td class="td-note">Cube vertical + horizontal members. Cut to length.</td>
+          <td class="td-note">Cube vertical + horizontal members. Cut to length. 300mm = 12 pieces.</td>
         </tr>
         <tr>
           <td class="td-status"><span class="status status-tbd"></span></td>
@@ -518,7 +787,7 @@
   <div class="section">
     <div class="section-header">
       <h2>// Electronics &amp; Power</h2>
-      <span class="section-note">24V main bus · ESP32 GRBL controller · RECOM stepdowns · Mean Well PSU</span>
+      <span class="section-note">24V main bus · ESP32-S3 FluidNC · RPi Zero 2W bCNC · RECOM stepdowns · Mean Well PSU</span>
     </div>
     <table>
       <thead>
@@ -538,55 +807,153 @@
           <td class="td-part">Mean Well LRS-150-24</td>
           <td class="td-spec">150W, 24V / 6.5A, enclosed, CE certified</td>
           <td class="td-source"><span class="badge badge-gme">GME</span></td>
-          <td class="td-note">Main 24V bus. Comfortable headroom for 3× NEMA17 + spindle. GME, 15min walk.</td>
+          <td class="td-note">Main 24V bus. ~700 CZK. GME, 15min walk.</td>
         </tr>
         <tr>
           <td class="td-status"><span class="status status-order"></span></td>
           <td class="td-qty">1×</td>
           <td class="td-part">RECOM R-78E5.0-1.0</td>
-          <td class="td-spec">24V → 5V, 1A, SIP3, 93% efficiency</td>
+          <td class="td-spec">24V → 5V, 1A, SIP3, 93% eff.</td>
           <td class="td-source"><span class="badge badge-tme">TME</span></td>
-          <td class="td-note">Logic 5V rail. No heatsink needed. Fixed output, clean footprint.</td>
+          <td class="td-note">Logic 5V rail. Fixed output, no heatsink. ~90 CZK.</td>
         </tr>
         <tr>
           <td class="td-status"><span class="status status-order"></span></td>
           <td class="td-qty">1×</td>
           <td class="td-part">RECOM R-78E3.3-1.0</td>
-          <td class="td-spec">24V → 3.3V, 1A, SIP3, 91% efficiency</td>
+          <td class="td-spec">24V → 3.3V, 1A, SIP3, 91% eff.</td>
           <td class="td-source"><span class="badge badge-tme">TME</span></td>
-          <td class="td-note">ESP32 + sensor rail. Verify input range 7–28V ✓ covers 24V.</td>
+          <td class="td-note">ESP32-S3 rail. ~90 CZK.</td>
         </tr>
         <tr>
           <td class="td-status"><span class="status status-tbd"></span></td>
           <td class="td-qty">1×</td>
-          <td class="td-part">ESP32 WROOM-32</td>
-          <td class="td-spec">Bare module or dev board, GRBL-ESP32 firmware</td>
+          <td class="td-part">ESP32-S3 module</td>
+          <td class="td-spec">ESP32-S3-WROOM, native USB-C OTG, 8MB PSRAM, FluidNC firmware</td>
           <td class="td-source"><span class="badge badge-tme">TME</span></td>
-          <td class="td-note">GRBL controller core. WiFi enables wireless job upload. ROS2 serial bridge.</td>
+          <td class="td-note">Real-time GRBL motion control. Streams G-code from RPi Zero via serial. ~200 CZK.</td>
         </tr>
         <tr>
           <td class="td-status"><span class="status status-tbd"></span></td>
           <td class="td-qty">1×</td>
-          <td class="td-part">Raspberry Pi 4B / 5</td>
-          <td class="td-spec">2GB+ RAM, ROS2 Humble/Jazzy host</td>
+          <td class="td-part">Raspberry Pi Zero 2W</td>
+          <td class="td-spec">ARM Cortex-A53 ×4, 512MB RAM, WiFi, mini HDMI, micro USB OTG</td>
           <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
-          <td class="td-note">High-level: ROS2 nodes, toolpath processing, vision (future). Optional for V1.</td>
+          <td class="td-note">Runs bCNC on Linux. Feeds G-code to ESP32. Drives 5" HDMI display. ~400 CZK.</td>
         </tr>
         <tr>
           <td class="td-status"><span class="status status-tbd"></span></td>
           <td class="td-qty">1×</td>
-          <td class="td-part">LVGL display — TFT colour</td>
-          <td class="td-spec">3.5–4" SPI, ILI9488 or ST7796, 320×480</td>
+          <td class="td-part">USB OTG micro hub</td>
+          <td class="td-spec">micro USB OTG → 2–3× USB-A. Passive or powered.</td>
           <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
-          <td class="td-note">Live XYZ position, spindle state, job progress. MicroPython + LVGL UI.</td>
+          <td class="td-note">RPi Zero has 1× OTG port. Hub splits to: touch USB + SSD USB. ~150 CZK.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">USB → SATA adapter</td>
+          <td class="td-spec">USB 3.0 to SATA 2.5", UASP support</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">Connects Kingston 240GB SSD to RPi Zero. G-code files + bCNC live here. ~150 CZK.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-have"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">Kingston SSD 240GB</td>
+          <td class="td-spec">2.5" SATA, existing stock</td>
+          <td class="td-source"><span class="badge badge-print">In stock</span></td>
+          <td class="td-note">Already owned. OS on micro SD, all data on SSD. Zero waste. 0 CZK.</td>
+        </tr>
+        <tr>
+          <td class="td-status"><span class="status status-tbd"></span></td>
+          <td class="td-qty">1×</td>
+          <td class="td-part">5" HDMI touch display</td>
+          <td class="td-spec">800×480, capacitive touch, HDMI + USB touch, 5V powered</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-note">
+            Machine face. bCNC runs fullscreen in Chromium. ~1200–1500 CZK.<br>
+            <a href="https://www.waveshare.com/5inch-hdmi-lcd-b.htm" style="color:var(--accent);text-decoration:none">→ Waveshare 5" HDMI LCD (B)</a> ·
+            <a href="https://www.elecrow.com/5-inch-hdmi-display-with-touch-screen.html" style="color:var(--accent);text-decoration:none">→ Elecrow 5" HDMI touch</a>
+          </td>
         </tr>
         <tr>
           <td class="td-status"><span class="status status-tbd"></span></td>
           <td class="td-qty">1×</td>
           <td class="td-part">Controller PCB</td>
-          <td class="td-spec">Custom KiCad design — ESP32, stepper drivers, RECOM modules</td>
+          <td class="td-spec">Custom KiCad — ESP32-S3, TMC2209 ×3, RECOM modules, connectors</td>
           <td class="td-source"><span class="badge badge-print">Own CNC</span></td>
-          <td class="td-note">First real board milled on the CUBE itself. Bootstrapping moment.</td>
+          <td class="td-note">First board milled on CUBE itself. Bootstrapping moment.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── SOFTWARE ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Software Stack</h2>
+      <span class="section-note">All free / open source · Python-friendly · no laptop at machine</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Tool</th>
+          <th>Role</th>
+          <th>Platform</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-part">PCB design</td>
+          <td class="td-spec" style="color:var(--text)">KiCad 8</td>
+          <td class="td-note">Schematic + PCB layout → Gerber export</td>
+          <td class="td-spec">PC / Linux</td>
+          <td class="td-source"><a href="https://www.kicad.org" style="color:var(--accent);text-decoration:none">kicad.org</a></td>
+        </tr>
+        <tr>
+          <td class="td-part">CAM — Gerber → G-code</td>
+          <td class="td-spec" style="color:var(--text)">FlatCAM</td>
+          <td class="td-note">Isolation routing, drilling, outline. Python-based.</td>
+          <td class="td-spec">PC / Linux</td>
+          <td class="td-source"><a href="http://flatcam.org" style="color:var(--accent);text-decoration:none">flatcam.org</a></td>
+        </tr>
+        <tr>
+          <td class="td-part">Motion firmware</td>
+          <td class="td-spec" style="color:var(--text)">FluidNC</td>
+          <td class="td-note">Modern GRBL for ESP32-S3. WiFi, WebUI, active dev.</td>
+          <td class="td-spec">ESP32-S3</td>
+          <td class="td-source"><a href="https://github.com/bdring/FluidNC" style="color:var(--accent);text-decoration:none">github FluidNC</a></td>
+        </tr>
+        <tr>
+          <td class="td-part" style="color:var(--accent)">G-code sender ★</td>
+          <td class="td-spec" style="color:var(--text)">bCNC</td>
+          <td class="td-note">Python + Tkinter. Runs on RPi Zero. Jog, zero, run. Preferred.</td>
+          <td class="td-spec">RPi Zero 2W</td>
+          <td class="td-source"><a href="https://github.com/vlachoudis/bCNC" style="color:var(--accent);text-decoration:none">github bCNC</a></td>
+        </tr>
+        <tr>
+          <td class="td-part">G-code sender alt.</td>
+          <td class="td-spec" style="color:var(--text)">CNCjs</td>
+          <td class="td-note">Node.js web UI. Browser-based, polished. Non-Python.</td>
+          <td class="td-spec">RPi Zero 2W</td>
+          <td class="td-source"><a href="https://cncjs.io" style="color:var(--accent);text-decoration:none">cncjs.io</a></td>
+        </tr>
+        <tr>
+          <td class="td-part">G-code sender alt.</td>
+          <td class="td-spec" style="color:var(--text)">Candle</td>
+          <td class="td-note">Qt C++ desktop app. Clean UI. Good GRBL visualizer.</td>
+          <td class="td-spec">PC / Linux</td>
+          <td class="td-source"><a href="https://github.com/Denvi/Candle" style="color:var(--accent);text-decoration:none">github Candle</a></td>
+        </tr>
+        <tr>
+          <td class="td-part">G-code sender alt.</td>
+          <td class="td-spec" style="color:var(--text)">UGS</td>
+          <td class="td-note">Universal Gcode Sender. Java. Feature-rich, cross-platform.</td>
+          <td class="td-spec">PC / Linux</td>
+          <td class="td-source"><a href="https://winder.github.io/ugs_website" style="color:var(--accent);text-decoration:none">UGS site</a></td>
         </tr>
       </tbody>
     </table>
@@ -727,6 +1094,140 @@
           <td class="td-spec">PA-CF body, M5 metal insert, V-groove self-locating</td>
           <td class="td-source"><span class="badge badge-print">3D Print</span></td>
           <td class="td-note">Self-locates on profile centre. Enables bracketless direct-tap assembly.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── PRICE SUMMARY ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// Rough Price Summary</h2>
+      <span class="section-note">CZK estimates · confirmed where sourced · ~ market estimate elsewhere · excl. shipping</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Key Parts</th>
+          <th>Source</th>
+          <th>Est. CZK</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-part">Frame — 2020 profiles</td>
+          <td class="td-spec">~5m total K2020 cut to length + T-nuts + M5 screws</td>
+          <td class="td-source"><span class="badge badge-ehlinik">eHliník</span> <span class="badge badge-tme">TME</span></td>
+          <td class="td-qty">~800</td>
+          <td class="td-note">~ estimate · ~120 CZK/m profile × 3.6m total, hardware ~300</td>
+        </tr>
+        <tr>
+          <td class="td-part">Power supply</td>
+          <td class="td-spec">Mean Well LRS-150-24, 156W 24V/6.5A</td>
+          <td class="td-source"><span class="badge badge-gme">GME</span></td>
+          <td class="td-qty">~700</td>
+          <td class="td-note">✓ confirmed · ~28 EUR at GME, 15min walk</td>
+        </tr>
+        <tr>
+          <td class="td-part">RECOM step-downs</td>
+          <td class="td-spec">R-78E5.0-1.0 + R-78E3.3-1.0</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-qty">~180</td>
+          <td class="td-note">✓ confirmed · ~75–90 CZK each at TME</td>
+        </tr>
+        <tr>
+          <td class="td-part">Stepper motors × 3</td>
+          <td class="td-spec">NEMA 17, 40–48mm, 40+ N·cm</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-qty">~900</td>
+          <td class="td-note">~ estimate · ~300 CZK/motor from TME or EU supplier</td>
+        </tr>
+        <tr>
+          <td class="td-part">Stepper drivers × 3</td>
+          <td class="td-spec">TMC2209 modules</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-qty">~450</td>
+          <td class="td-note">~ estimate · ~150 CZK/driver</td>
+        </tr>
+        <tr>
+          <td class="td-part">Linear rails</td>
+          <td class="td-spec">MGN12H × 2 (300mm) + MGN9H × 1 (150mm)</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-qty">~900</td>
+          <td class="td-note">~ estimate · quality rails ~250–350 CZK/pc EU source</td>
+        </tr>
+        <tr>
+          <td class="td-part">Lead screws × 3</td>
+          <td class="td-spec">TR8×8 + brass anti-backlash nuts + couplers</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-qty">~600</td>
+          <td class="td-note">~ estimate · ~150–200 CZK/axis complete</td>
+        </tr>
+        <tr>
+          <td class="td-part">Spindle</td>
+          <td class="td-spec">300–500W brushless, 24V, ER11 collet + controller</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-qty">~1500</td>
+          <td class="td-note">~ estimate · wide range, quality unit needed for PCB routing</td>
+        </tr>
+        <tr>
+          <td class="td-part">ESP32 + controller PCB</td>
+          <td class="td-spec">ESP32 WROOM module + custom KiCad board fab</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-qty">~400</td>
+          <td class="td-note">~ estimate · ESP32 ~150 + PCB proto ~250 own CNC eventually</td>
+        </tr>
+        <tr>
+          <td class="td-part">Display</td>
+          <td class="td-spec">3.5" colour TFT, SPI, LVGL</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-qty">~350</td>
+          <td class="td-note">~ estimate · from existing collection possibly 0 CZK (:  </td>
+        </tr>
+        <tr>
+          <td class="td-part">Acrylic / PC panels</td>
+          <td class="td-spec">4× acrylic sides + 1× PC front door, cut to size</td>
+          <td class="td-source"><span class="badge badge-tbd">TBD</span></td>
+          <td class="td-qty">~600</td>
+          <td class="td-note">~ estimate · local plastics supplier or laser cut service</td>
+        </tr>
+        <tr>
+          <td class="td-part">Misc hardware</td>
+          <td class="td-spec">Cable chain, limit switches, drag chain, feet, connectors, wire</td>
+          <td class="td-source"><span class="badge badge-tme">TME</span></td>
+          <td class="td-qty">~800</td>
+          <td class="td-note">~ estimate · always more than expected, buffer included</td>
+        </tr>
+        <tr>
+          <td class="td-part">3D printed parts</td>
+          <td class="td-spec">PA-CF + PETG-CF filament for motor mounts, carriages, dust shoe</td>
+          <td class="td-source"><span class="badge badge-print">3D Print</span></td>
+          <td class="td-qty">~400</td>
+          <td class="td-note">~ estimate · ~500g PA-CF filament at ~800 CZK/kg</td>
+        </tr>
+        <tr>
+          <td class="td-part">Dad's CNC parts</td>
+          <td class="td-spec">Machined Al end plates, axis interfaces</td>
+          <td class="td-source"><span class="badge badge-father">Dad's CNC</span></td>
+          <td class="td-qty">~0</td>
+          <td class="td-note">Material cost only — Al stock ~200 CZK, machining = priceless (:  </td>
+        </tr>
+        <!-- TOTAL ROW -->
+        <tr style="border-top: 2px solid var(--accent); background: var(--bg2);">
+          <td class="td-part" style="color: var(--accent); font-size: 15px;">TOTAL ESTIMATE</td>
+          <td class="td-spec" style="color: var(--muted);">First build · no labour · excl. Raspberry Pi (optional V1)</td>
+          <td class="td-source"></td>
+          <td class="td-qty" style="color: var(--accent); font-size: 16px;">~8 400</td>
+          <td class="td-note" style="color: var(--accent);">CZK · ±30% · ~330 EUR</td>
+        </tr>
+        <tr style="background: var(--bg2);">
+          <td class="td-part" style="color: var(--muted);">Kit margin target</td>
+          <td class="td-spec" style="color: var(--muted);">If sold as kit: materials × 1.8–2.0 + assembly doc value</td>
+          <td class="td-source"></td>
+          <td class="td-qty" style="color: var(--muted);">~15–17k</td>
+          <td class="td-note" style="color: var(--muted);">CZK · rough target · competitive vs. similar machines</td>
         </tr>
       </tbody>
     </table>
