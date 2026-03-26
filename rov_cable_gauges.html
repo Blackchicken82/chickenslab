@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ROV Wire Gauges v03</title>
+  <style>
+
+    /* ── page ── */
+    body {
+      background: #060e12;
+      color: #c8ddd9;
+      font-family: 'Courier New', monospace;
+      padding: 32px 24px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 900;
+      color: #e8f4f0;
+      margin: 0 0 4px;
+    }
+
+    h1 span { color: #FF9932; }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #FF9932;
+      margin: 40px 0 4px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    p.sub {
+      color: #4a7a70;
+      font-size: 13px;
+      margin: 0 0 24px;
+    }
+
+    /* ── table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      text-align: left;
+      padding: 8px 12px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #FF9932;
+      border-bottom: 1px solid #FF993240;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #0d2020;
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: #0d1f1f;
+    }
+
+    /* ── viz circle ── */
+    .viz {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+    }
+
+    /* ── flex dots ── */
+    .dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #1a2e2e;
+    }
+
+    /* ── tag ── */
+    .tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    /* ── direction badge ── */
+    .dir {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    /* ── tether box ── */
+    .tether {
+      margin-top: 28px;
+      padding: 14px 18px;
+      border: 1px solid #FF993250;
+      border-radius: 8px;
+      background: #0a1a14;
+      font-size: 13px;
+    }
+
+    .tether strong {
+      color: #FF9932;
+      letter-spacing: 1px;
+      font-size: 12px;
+    }
+
+    .tether span {
+      color: #4a7a70;
+      font-size: 12px;
+    }
+
+    /* ── divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #0d2020;
+      margin: 40px 0 0;
+    }
+
+    /* ── note ── */
+    .note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #4a7a70;
+      line-height: 1.8;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ══ SECTION 1: WIRE GAUGES ══ -->
+
+  <h1>Wire reference <span>table</span></h1>
+  <p class="sub">AWG · diameter (mm) · area (mm²) · current · ROV application</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>AWG</th>
+        <th>Diameter</th>
+        <th>Area</th>
+        <th>Max current</th>
+        <th>Max @12V</th>
+        <th>Flex</th>
+        <th>Typical use</th>
+        <th>ROV application</th>
+      </tr>
+    </thead>
+    <tbody id="tbody-wires"></tbody>
+  </table>
+
+  <div class="tether">
+    <strong>⚓ YOUR TETHER</strong> &nbsp;
+    LAPP 12×0.5mm²
+    <span>&nbsp;·&nbsp; ~0.80mm dia &nbsp;·&nbsp; 0.5mm² per core &nbsp;·&nbsp; max 4A per core &nbsp;·&nbsp; 12 cores &nbsp;·&nbsp; ≈ AWG 20 per core</span>
+  </div>
+
+  <p class="note">
+    NOTE — Current ratings for single wire in free air at 25°C.
+    Bundled or enclosed routing: derate ~20–30%.
+    Always size for peak current, not average.
+  </p>
+
+  <!-- ══ SECTION 2: CONNECTORS ══ -->
+
+  <hr class="divider">
+  <h2>Connector <span style="color:#e8f4f0">reference</span></h2>
+  <p class="sub">Pitch · max current · wire gauge · ideal use · ROV application</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Connector</th>
+        <th>Pitch</th>
+        <th>Max current</th>
+        <th>Wire gauge</th>
+        <th>Ideal use</th>
+        <th>ROV application</th>
+      </tr>
+    </thead>
+    <tbody id="tbody-connectors"></tbody>
+  </table>
+
+  <p class="note">
+    NOTE — Current ratings per pin at 25°C. Derate in hot or enclosed environments.
+    Always match connector tier to wire gauge for reliable crimps.
+  </p>
+
+  <!-- ══ SECTION 3: WEIPO 12-PIN WIRING ══ -->
+
+  <hr class="divider">
+  <h2>Weipo 12-pin <span style="color:#e8f4f0">module → sub</span></h2>
+  <p class="sub">Silicone wire · 7–10cm runs · pin assignment · gauge · max current</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pin</th>
+        <th>Signal</th>
+        <th>Direction</th>
+        <th>Color</th>
+        <th>AWG</th>
+        <th>Max current</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody id="tbody-weipo"></tbody>
+  </table>
+
+  <p class="note">
+    NOTE — Silicone wire, short runs 7–10cm. All signals well within ratings.
+    Power pair 22AWG handles 2A system load with margin.
+    Camera and I²C are passive signal lines — current draw negligible.
+  </p>
+
+  <script>
+
+    // ══ WIRE DATA ══
+    const wires = [
+      { awg: 28, dia: 0.32, mm2: 0.08, maxA: 0.5,  maxW: 6,   flex: 5, color: '#60a5fa', use: 'I²C, UART, SPI',        rov: 'Sensor bus, GPIO'        },
+      { awg: 26, dia: 0.40, mm2: 0.13, maxA: 1.0,  maxW: 12,  flex: 5, color: '#34d399', use: 'PWM, low current',       rov: 'ESC PWM, switch lines'   },
+      { awg: 24, dia: 0.51, mm2: 0.20, maxA: 2.0,  maxW: 24,  flex: 4, color: '#a3e635', use: 'LED strips, logic pwr',  rov: 'ROV LEDs, 3.3V/5V rails' },
+      { awg: 22, dia: 0.64, mm2: 0.32, maxA: 3.5,  maxW: 42,  flex: 4, color: '#facc15', use: 'Small motors, sensors',  rov: 'Camera power, aux'        },
+      { awg: 20, dia: 0.81, mm2: 0.52, maxA: 5.0,  maxW: 60,  flex: 3, color: '#fb923c', use: 'Motor power, 12V lines', rov: 'Tether power cores'       },
+      { awg: 18, dia: 1.02, mm2: 0.82, maxA: 10.0, maxW: 120, flex: 2, color: '#f87171', use: 'Main power distrib.',    rov: 'Battery to ESC, XT30'     },
+      { awg: 16, dia: 1.29, mm2: 1.31, maxA: 15.0, maxW: 180, flex: 1, color: '#e879f9', use: 'High current, battery',  rov: 'XT60 main battery'        },
+    ];
+
+    // ══ CONNECTOR DATA ══
+    const connectors = [
+      { name: 'JST XH',     pitch: '2.54mm',    maxA: '3A',  gauge: '28–22 AWG / 0.08–0.3mm²', use: 'Signals, sensors, PCB',        rov: 'I²C, UART, PWM, GPIO',    color: '#60a5fa' },
+      { name: 'JST VH',     pitch: '3.96mm',    maxA: '10A', gauge: '22–18 AWG / 0.3–0.8mm²',  use: 'Mid power, module disconnect',  rov: 'Panel module, LED power',  color: '#34d399' },
+      { name: 'Faston 2.8', pitch: '2.8mm tab', maxA: '10A', gauge: '22–18 AWG / 0.5–1.5mm²',  use: 'Mid range, quick disconnect',   rov: 'Suitcase module connector', color: '#facc15' },
+      { name: 'XT30',       pitch: '—',         maxA: '30A', gauge: '20–16 AWG / 0.5–1.5mm²',  use: 'Small battery, mid current',    rov: 'Control panel battery',    color: '#fb923c' },
+      { name: 'XT60',       pitch: '—',         maxA: '60A', gauge: '16–12 AWG / 1.5–4mm²',    use: 'Main battery, high current',    rov: 'ROV main battery pack',    color: '#f87171' },
+    ];
+
+    // ══ WEIPO 12-PIN DATA ══
+    const weipo = [
+      { pin: 1,  signal: '12V power',     dir: 'OUT', wireColor: '#e74c3c', wireName: 'red',    awg: 22, maxA: 3.5, note: '~2A system load, 22AWG silicone' },
+      { pin: 2,  signal: 'GND common',    dir: 'OUT', wireColor: '#2c3e50', wireName: 'black',  awg: 22, maxA: 3.5, note: 'Common ground for all sub systems' },
+      { pin: 3,  signal: 'PWM motor 1',   dir: 'OUT', wireColor: '#f1c40f', wireName: 'yellow', awg: 24, maxA: 2.0, note: 'ESC signal only, <10mA' },
+      { pin: 4,  signal: 'PWM motor 2',   dir: 'OUT', wireColor: '#f1c40f', wireName: 'yellow', awg: 24, maxA: 2.0, note: 'ESC signal only, <10mA' },
+      { pin: 5,  signal: 'PWM motor 3',   dir: 'OUT', wireColor: '#f1c40f', wireName: 'yellow', awg: 24, maxA: 2.0, note: 'ESC signal only, <10mA' },
+      { pin: 6,  signal: 'PWM motor 4',   dir: 'OUT', wireColor: '#f1c40f', wireName: 'yellow', awg: 24, maxA: 2.0, note: 'ESC signal only, <10mA' },
+      { pin: 7,  signal: 'PWM motor 5',   dir: 'OUT', wireColor: '#f1c40f', wireName: 'yellow', awg: 24, maxA: 2.0, note: 'ESC signal only, <10mA' },
+      { pin: 8,  signal: 'PWM lights',    dir: 'OUT', wireColor: '#2ecc71', wireName: 'green',  awg: 24, maxA: 2.0, note: 'MOSFET gate signal' },
+      { pin: 9,  signal: 'PWM gimbal',    dir: 'OUT', wireColor: '#3498db', wireName: 'blue',   awg: 24, maxA: 2.0, note: 'Servo signal for cam tilt' },
+      { pin: 10, signal: 'I²C SDA',       dir: '↔',   wireColor: '#ecf0f1', wireName: 'white',  awg: 24, maxA: 2.0, note: 'Sub depth sensor MS5837' },
+      { pin: 11, signal: 'I²C SCL',       dir: '↔',   wireColor: '#95a5a6', wireName: 'grey',   awg: 24, maxA: 2.0, note: 'Sub depth sensor MS5837' },
+      { pin: 12, signal: 'Camera signal', dir: 'IN',  wireColor: '#e67e22', wireName: 'orange', awg: 24, maxA: 2.0, note: 'Analog video sub → suitcase display' },
+    ];
+
+    // ══ HELPERS ══
+
+    function vizCircle(dia, color) {
+      const r = Math.max(dia * 11, 3);
+      return `
+        <svg width="36" height="36" style="overflow:visible">
+          <circle cx="18" cy="18" r="${r}"       fill="${color}" opacity="0.2"/>
+          <circle cx="18" cy="18" r="${r * 0.6}" fill="${color}" opacity="0.5"/>
+          <circle cx="18" cy="18" r="${r * 0.3}" fill="${color}"/>
+        </svg>`;
+    }
+
+    function flexDots(n, color) {
+      let html = '<div class="dots">';
+      for (let i = 1; i <= 5; i++) {
+        html += `<div class="dot" style="background:${i <= n ? color : '#1a2e2e'}"></div>`;
+      }
+      return html + '</div>';
+    }
+
+    // direction badge colors
+    function dirBadge(dir) {
+      const map = {
+        'OUT': { bg: '#FF993220', border: '#FF993260', color: '#FF9932', label: '→ OUT' },
+        'IN':  { bg: '#60a5fa20', border: '#60a5fa60', color: '#60a5fa', label: '← IN'  },
+        '↔':   { bg: '#34d39920', border: '#34d39960', color: '#34d399', label: '↔ BUS'  },
+      };
+      const s = map[dir] || map['OUT'];
+      return `<span class="dir"
+        style="background:${s.bg};border:1px solid ${s.border};color:${s.color}">
+        ${s.label}
+      </span>`;
+    }
+
+    // wire color swatch
+    function wireSwatch(color, name) {
+      return `<span style="display:inline-flex;align-items:center;gap:6px">
+        <span style="width:12px;height:12px;border-radius:50%;
+                     background:${color};border:1px solid #ffffff30;
+                     display:inline-block"></span>
+        <span style="color:#8ab8b0;font-size:12px">${name}</span>
+      </span>`;
+    }
+
+    // ══ RENDER WIRES ══
+    const tbodyWires = document.getElementById('tbody-wires');
+    wires.forEach(w => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><div class="viz">${vizCircle(w.dia, w.color)}</div></td>
+        <td style="color:${w.color};font-size:15px;font-weight:700">${w.awg}</td>
+        <td>${w.dia} <span style="color:#4a7a70;font-size:11px">mm</span></td>
+        <td>${w.mm2} <span style="color:#4a7a70;font-size:11px">mm²</span></td>
+        <td><strong>${w.maxA}</strong> <span style="color:#4a7a70;font-size:11px">A</span></td>
+        <td>${w.maxW} <span style="color:#4a7a70;font-size:11px">W</span></td>
+        <td>${flexDots(w.flex, w.color)}</td>
+        <td style="color:#8ab8b0;font-size:12px">${w.use}</td>
+        <td><span class="tag" style="color:${w.color};border-color:${w.color}40;background:${w.color}15">${w.rov}</span></td>`;
+      tbodyWires.appendChild(tr);
+    });
+
+    // ══ RENDER CONNECTORS ══
+    const tbodyConn = document.getElementById('tbody-connectors');
+    connectors.forEach(c => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="color:${c.color};font-size:15px;font-weight:700">${c.name}</td>
+        <td style="color:#8ab8b0">${c.pitch}</td>
+        <td><strong style="color:${c.color}">${c.maxA}</strong><span style="color:#4a7a70;font-size:11px"> per pin</span></td>
+        <td style="color:#8ab8b0;font-size:12px">${c.gauge}</td>
+        <td style="color:#8ab8b0;font-size:12px">${c.use}</td>
+        <td><span class="tag" style="color:${c.color};border-color:${c.color}40;background:${c.color}15">${c.rov}</span></td>`;
+      tbodyConn.appendChild(tr);
+    });
+
+    // ══ RENDER WEIPO ══
+    const tbodyWeipo = document.getElementById('tbody-weipo');
+    weipo.forEach(w => {
+      const tr = document.createElement('tr');
+      // highlight power pins
+      const isPower = w.pin <= 2;
+      tr.innerHTML = `
+        <td style="color:${isPower ? '#FF9932' : '#4a7a70'};font-weight:${isPower ? 700 : 400}">${w.pin}</td>
+        <td style="color:#e8f4f0;font-weight:${isPower ? 700 : 400}">${w.signal}</td>
+        <td>${dirBadge(w.dir)}</td>
+        <td>${wireSwatch(w.wireColor, w.wireName)}</td>
+        <td style="color:${isPower ? '#facc15' : '#a3e635'};font-weight:700">${w.awg}</td>
+        <td>
+          <strong style="color:${isPower ? '#facc15' : '#a3e635'}">${w.maxA}</strong>
+          <span style="color:#4a7a70;font-size:11px"> A</span>
+        </td>
+        <td style="color:#4a7a70;font-size:12px">${w.note}</td>`;
+      tbodyWeipo.appendChild(tr);
+    });
+
+  </script>
+</body>
+</html>
